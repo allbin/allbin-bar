@@ -37,7 +37,7 @@ const dictionary: TypedDictionary<Dictionary> = {
         change_password: 'byt lösenord',
         changed: 'ändrat',
         changelog: 'versionshistorik',
-        company_info_1: `All Binary verkar inom två huvudsakliga affärsområden med den gemensamma nämnaren 
+        company_info_1: `All Binary verkar inom två huvudsakliga affärsområden med den gemensamma nämnaren
             att vi underlättar hantering, visualisering och användning av data.`,
         company_info_2: `Affärsområdet Transport tar fasta på att det aldrig varit viktigare än nu att resa mer kollektivt.
             Vi underlättar analys och planering av kollektivtrafiken genom att visualisera data från realtidssystem och
