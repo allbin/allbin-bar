@@ -1,0 +1,152 @@
+{
+    "extends": [
+        "tslint-eslint-rules",
+        "tslint-react"
+    ],
+    "rules": {
+        "jsx-no-lambda": false,
+        "no-string-throw": true,
+        "no-unused-expression": false,
+        "no-duplicate-variable": true,
+        "curly": true,
+        "class-name": true,
+        "semicolon": {
+            "severity": "error"
+        },
+        "no-trailing-whitespace": {
+            "severity": "error"
+        },
+        "triple-equals": {
+            "severity": "error"
+        },
+        "one-variable-per-declaration": [
+            true,
+            "ignore-for-loop"
+        ],
+        "ter-arrow-parens": [
+            true,
+            "as-needed"
+        ],
+        "ter-arrow-spacing": [
+            true,
+            {
+                "before": true,
+                "after": true
+            }
+        ],
+        "array-bracket-spacing": {
+            "options": [
+                "never"
+            ],
+            "severity": "error"
+        },
+        "new-parens": {
+            "severity": "error"
+        },
+        "no-cond-assign": [
+            "warn",
+            "always"
+        ],
+        "no-control-regex": {
+            "severity": "error"
+        },
+        "no-duplicate-case": {
+            "severity": "error"
+        },
+        "no-empty-character-class": {
+            "severity": "error"
+        },
+        "no-eval": {
+            "severity": "error"
+        },
+        "no-ex-assign": {
+            "severity": "error"
+        },
+        "no-extra-semi": {
+            "severity": "error"
+        },
+        "no-invalid-regexp": {
+            "severity": "error"
+        },
+        "no-invalid-this": {
+            "severity": "error"
+        },
+        "import-spacing": {
+            "severity": "error"
+        },
+        "no-labels": [
+            "warn",
+            {
+                "allowLoop": false,
+                "allowSwitch": false
+            }
+        ],
+        "no-mixed-operators": [
+            "warn",
+            {
+                "groups": [
+                    [
+                        "&",
+                        "|",
+                        "^",
+                        "~",
+                        "<<",
+                        ">>",
+                        ">>>"
+                    ],
+                    [
+                        "==",
+                        "!=",
+                        "===",
+                        "!==",
+                        ">",
+                        ">=",
+                        "<",
+                        "<="
+                    ],
+                    [
+                        "&&",
+                        "||"
+                    ],
+                    [
+                        "in",
+                        "instanceof"
+                    ]
+                ],
+                "allowSamePrecedence": false
+            }
+        ],
+        "no-regex-spaces": {
+            "severity": "error"
+        },
+        "no-sparse-arrays": {
+            "severity": "error"
+        },
+        "no-unexpected-multiline": {
+            "severity": "warning"
+        },
+        "radix": {
+            "severity": "error"
+        },
+        "use-isnan": {
+            "severity": "error"
+        },
+        "valid-typeof": {
+            "severity": "error"
+        },
+        "jsx-curly-spacing": "always",
+        "jsx-no-multiline-js": false,
+        "jsx-boolean-value": false
+    },
+    "defaultSeverity": "warning",
+    "exclude": [
+        "*./tmp/"
+    ],
+    "linterOptions": {
+        "exclude": [
+            "config/**/*.js",
+            "node_modules/**/*.ts",
+            "coverage/lcov-report/*.js"
+        ]
+    }
+}
