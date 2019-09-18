@@ -8,9 +8,9 @@
         "test": "react-scripts test",
         "eject": "react-scripts eject",
         "storybook": "start-storybook -p 6060",
-        "release:patch": "gulp4 release:patch",
-        "release:minor": "gulp4 release:minor",
-        "release:major": "gulp4 release:major"
+        "release:patch": "gulp4 buildAndReleasePatch",
+        "release:minor": "gulp4 buildAndReleaseMinor",
+        "release:major": "gulp4 buildAndReleaseMajor"
     },
     "dependencies": {
         "@material-ui/core": "4.1.3",
