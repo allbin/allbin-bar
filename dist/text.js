@@ -75,7 +75,7 @@ const dictionary = {
     },
 };
 const translate = (key, capitalize = true) => {
-    return oh.translateTyped(key, capitalize);
+    return oh.translateTyped(key, capitalize, undefined, undefined, dictionary);
 };
 export { dictionary };
 export default translate;
