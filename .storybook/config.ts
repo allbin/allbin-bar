@@ -6,7 +6,6 @@ if (!(window as any).has_run) {
     oh.setConfig({
         lang: 'sv-SE',
     });
-    oh.addDictionary(dictionary);
 
     (window as any).has_run = true;
 }

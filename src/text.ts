@@ -110,7 +110,7 @@ const dictionary: TypedDictionary<Dictionary> = {
 };
 
 const translate = (key: keyof Dictionary, capitalize: boolean = true) => {
-    return oh.translateTyped<Dictionary>(key, capitalize);
+    return oh.translateTyped<Dictionary>(key, capitalize, undefined, undefined, dictionary);
 };
 
 export { dictionary };
