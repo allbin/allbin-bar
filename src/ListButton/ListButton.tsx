@@ -14,7 +14,7 @@ import ExportIcon from '@material-ui/icons/Print';
 import InfoIcon from '@material-ui/icons/Info';
 import PresentationIcon from '@material-ui/icons/Fullscreen';
 import text from '../text';
-import { ButtonID } from '../';
+import { ButtonID } from '..';
 
 // import {
 //     SaveModalContent,

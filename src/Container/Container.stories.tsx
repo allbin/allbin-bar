@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Container from './';
+import Container from '.';
 import { action } from '@storybook/addon-actions';
 
 let sso = {

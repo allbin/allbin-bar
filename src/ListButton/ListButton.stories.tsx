@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { storiesOf } from '@storybook/react';
-import ListButton from './';
+import ListButton from '.';
 import { action } from '@storybook/addon-actions';
 import { List } from '@material-ui/core';
 

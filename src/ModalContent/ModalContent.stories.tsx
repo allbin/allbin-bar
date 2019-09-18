@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { storiesOf } from '@storybook/react';
 import { Modal, Grid, Card } from '@material-ui/core';
-import { Changelog, Contact } from './';
+import { Changelog, Contact } from '.';
 import { action } from '@storybook/addon-actions';
 import About from './About';
 
