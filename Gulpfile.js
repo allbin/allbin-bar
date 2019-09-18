@@ -75,11 +75,11 @@ gulp.task('clean', () => {
 
 gulp.task('build:static', () => {
     return gulp
-        .src(['./src/module/img/**/*'])
-        .pipe(gulp.dest('dist/module/img'));
+        .src(['./src/img/**/*'])
+        .pipe(gulp.dest('dist/img'));
 });
 
-gulp.task('build:compile', function() {
+gulp.task('build:compile', function () {
     return tsProject
         .src()
         .pipe(sourcemaps.init())

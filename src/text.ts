@@ -1,15 +1,19 @@
 import oh, { TypedDictionary } from 'output-helpers';
 
 type Keys =
+    | 'about'
     | 'a_tool_by_allbin'
+    | 'account_information'
+    | 'change_password'
+    | 'changed'
+    | 'changelog_info'
+    | 'changelog'
+    | 'close'
     | 'company_info_1'
     | 'company_info_2'
     | 'company_info_3'
-    | 'account_information'
-    | 'changed'
-    | 'changelog'
-    | 'change_password'
     | 'contact'
+    | 'current_version'
     | 'email_us'
     | 'email'
     | 'first_name'
@@ -17,8 +21,8 @@ type Keys =
     | 'help'
     | 'language'
     | 'last_name'
-    | 'log_out'
     | 'logged_in_as'
+    | 'logout'
     | 'new'
     | 'reset_password_info'
     | 'sent'
@@ -30,13 +34,16 @@ type Keys =
 export type Dictionary = { [key in Keys]: string };
 
 const dictionary: TypedDictionary<Dictionary> = {
-    'prefix': 'allbin_bar_',
+    // 'prefix': 'allbin_bar_',
     'sv-SE': {
+        about: 'om verktyget',
         a_tool_by_allbin: 'ett verktyg av All Binary',
         account_information: 'kontoinformation',
         change_password: 'byt lösenord',
         changed: 'ändrat',
         changelog: 'versionshistorik',
+        changelog_info: 'Versionshistoriken visar vad som hänt vid varje större release av verktyget.',
+        close: 'stäng',
         company_info_1: `All Binary verkar inom två huvudsakliga affärsområden med den gemensamma nämnaren
             att vi underlättar hantering, visualisering och användning av data.`,
         company_info_2: `Affärsområdet Transport tar fasta på att det aldrig varit viktigare än nu att resa mer kollektivt.
@@ -47,6 +54,7 @@ const dictionary: TypedDictionary<Dictionary> = {
             underlag för större investeringar och upphandlingar när man påvisat värde och fått med fler på tåget.
             SenseViews syfte är att underlätta och visuellt visa upp de pågående pilotprojekt som en stad genomför.`,
         contact: 'kontakt',
+        current_version: 'nuvarande version',
         email_us: 'skicka epost till oss',
         email: 'epost',
         first_name: 'förnamn',
@@ -54,7 +62,7 @@ const dictionary: TypedDictionary<Dictionary> = {
         help: 'hjälp',
         language: 'språk',
         last_name: 'efternamn',
-        log_out: 'logga ut',
+        logout: 'logga ut',
         logged_in_as: 'inloggad som',
         new: 'nytt',
         reset_password_info: 'när du klickar på knappen skickas ett epost till följande adress med instruktioner',
@@ -65,11 +73,14 @@ const dictionary: TypedDictionary<Dictionary> = {
     },
     'en-US': {
         //UI
+        about: 'about the tool',
         a_tool_by_allbin: 'a tool by All Binary',
         account_information: 'account information',
         change_password: 'change password',
         changed: 'changed',
         changelog: 'change log',
+        changelog_info: 'The changelog contains a list of changes made with each significant release of the tool.',
+        close: 'close',
         company_info_1: `All Binary operates within two primary business units with the common denominator that we make
             it easy to handle, visualize and use data.`,
         company_info_2: `Our Transport business unit is focused on the increasing need to travel together using public
@@ -79,6 +90,7 @@ const dictionary: TypedDictionary<Dictionary> = {
             become smarter. We believe in the power of experimenting with different sensors and pilots before investing
             in bigger systems. It is important to get more people onboard and with SenseView it is easier to show what is ongoing in the smart city or industry.`,
         contact: 'contact',
+        current_version: 'current version',
         email_us: 'email us',
         email: 'email',
         first_name: 'first name',
@@ -86,7 +98,7 @@ const dictionary: TypedDictionary<Dictionary> = {
         help: 'help',
         language: 'language',
         last_name: 'last name',
-        log_out: 'log out',
+        logout: 'sign out',
         logged_in_as: 'logged in as',
         new: 'new',
         reset_password_info: 'when you click the button an email will be sent to the follow address with instructions',

@@ -1,1 +1,1 @@
-export type ButtonID = 'changelog' | 'help' | 'contact' | 'to_dashboard';
+export type ButtonID = 'changelog' | 'help' | 'contact' | 'to_dashboard' | 'logout' | 'about';

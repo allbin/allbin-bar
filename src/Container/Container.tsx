@@ -8,7 +8,6 @@ import {
     IconButton,
     List,
     ListItem,
-    ListItemText,
     makeStyles,
     Modal,
     Theme,
@@ -19,40 +18,56 @@ import CloseIcon from '@material-ui/icons/Close';
 import text from '../text';
 import ListButton from '../ListButton';
 
-// import {
-//     SaveModalContent,
-//     ShareModalContent,
-//     ExportModalContent,
-// } from './ModalContent';
+import {
+    Changelog
+    //     SaveModalContent,
+    //     ShareModalContent,
+    //     ExportModalContent,
+} from '../ModalContent';
 
-declare global {
-    interface Window {
-        sso: any;
-    }
-}
 
 interface AllbinBarProps {
-    open: boolean;
-    onClose: () => void;
-    title: string;
-    /** Displays a 'logout' button at the bottom. Defaults to true. */
-    show_logout?: boolean;
-    /** URL sent to SSO.logout command. Defaults to 'https://login.allbin.se/'. */
+    /** Enables changelog button and displays the changelog. */
+    changelog?: any;
+    /** Enables changelog button and displays current_version. */
+    current_version?: string;
+    /**
+     * URL navigated to when 'to dashboard'-button is clicked, or provided to onDashboard callback is provided.
+     * Defaults to 'https://dashboard.allbin.se'.
+     */
+    dashboard_redirect_url?: string;
+    /**
+     * URL sent to SSO.logout command or onLogout callback if provided.
+     * Defaults to 'https://login.allbin.se/'.
+     */
     logout_redirect_url?: string;
+    onDashboard?: (dashboard_url: string) => void;
+    onClose: () => void;
+    onLogout?: (logout_url: string) => void;
+    /** Shows AllbinBar. Defaults to false. */
+    open: boolean;
+    /** Displays and enables 'contact'-button. Defaults to true. */
+    show_contact_btn?: boolean;
     /** Show what username was used to login. Defaults to true. */
     show_credentials?: boolean;
-
+    /** Dispalys and enables a 'to dashboard'-button Defaults to true. */
+    show_dashboard_btn?: boolean;
+    /** Displays and enables a 'logout'-button. Defaults to true. */
+    show_logout_btn?: boolean;
+    /** Reference to window.sso. */
+    sso: any;
+    title: string;
 }
 
 type AllbinBarContainerComponent = React.FunctionComponent<AllbinBarProps>;
 
-const border_radius = 4;
+const width = '300px';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         container: {},
         drawer: {
-            width: '600px',
+            width: width,
             flexShrink: 0,
             '& .MuiBackdrop-root': {
                 backgroundColor: 'rgba(9, 57, 128, 0.82)',
@@ -61,51 +76,14 @@ const useStyles = makeStyles((theme: Theme) =>
                 backgroundColor: '#fff',
             },
         },
-        background: {
-            width: '600px',
-            height: '510px',
-            position: 'absolute',
-            left: 0,
-            bottom: 0,
-            right: 0,
-            zIndex: 1,
-            pointerEvents: 'none',
-        },
-        appBar: { width: '600px' },
-        title: { fontWeight: 'bold' },
-        information: {
-            height: '120px',
-            backgroundColor: theme.palette.secondary.light,
-            padding: '28px 16px',
-        },
+        appBar: { width: width },
+        title: { fontWeight: 'bold', color: '#3f51b5' },
         menuButton: {
             marginLeft: -12,
             marginRight: 20,
         },
         list: {
             width: '100%',
-            padding: theme.spacing(1),
-        },
-        listItem: {
-            borderRadius: border_radius,
-            padding: theme.spacing(1, 2),
-            '&:HOVER': {
-                backgroundColor: theme.palette.primary.light,
-                '& span': {
-                    color: '#fff',
-                },
-                '& p': {
-                    color: '#fff !important',
-                },
-            },
-            '& span': {
-                color: '#413D49',
-                fontSize: 18,
-            },
-        },
-        listItemNoHover: {
-            borderRadius: border_radius,
-            padding: theme.spacing(1, 2),
         },
         fullList: {
             width: 'auto',
@@ -121,46 +99,48 @@ const useStyles = makeStyles((theme: Theme) =>
             outline: 'none',
         },
         bottomList: {
-            borderRadius: '32px 32px 0 0',
+            borderRadius: '8px 8px 0 0',
             backgroundColor: '#413D49',
             position: 'absolute',
             left: 0,
             bottom: 0,
             right: 0,
-            padding: theme.spacing(3, 3),
+            padding: theme.spacing(1, 2),
             zIndex: 2,
         },
-        closeButton: {
-            borderRadius: border_radius,
-            backgroundColor: theme.palette.primary.main,
-            padding: theme.spacing(2),
-            '& span': {
-                color: '#fff',
-                fontSize: 16,
-                textAlign: 'center',
-                display: 'block',
-            },
-        },
+        credentials: {
+            color: 'white'
+        }
     }),
 );
 
 
-type ModalState = 'hidden' | 'save' | 'share' | 'export';
+type ModalState = 'hidden' | 'changelog' | 'contact';
 
 const AllbinBarContainer: AllbinBarContainerComponent = ({
-    children,
-    open,
-    onClose,
-    title,
+    changelog,
+    current_version,
+    dashboard_redirect_url,
     logout_redirect_url,
-    show_logout,
-    show_credentials
+    onClose,
+    onDashboard,
+    onLogout,
+    open,
+    show_contact_btn,
+    show_credentials,
+    show_dashboard_btn,
+    show_logout_btn,
+    sso,
+    title,
 }) => {
     let [modal_state, setModalState] = useState<ModalState>('hidden');
 
+    dashboard_redirect_url = dashboard_redirect_url || 'https://dashboard.allbin.se';
     logout_redirect_url = logout_redirect_url || 'https://login.allbin.se';
-    show_logout = show_logout !== undefined ? show_logout : true;
+    show_contact_btn = show_contact_btn !== undefined ? show_contact_btn : true;
+    show_dashboard_btn = show_dashboard_btn !== undefined ? show_dashboard_btn : true;
     show_credentials = show_credentials !== undefined ? show_credentials : true;
+    show_logout_btn = show_logout_btn !== undefined ? show_logout_btn : true;
 
     const classes = useStyles();
 
@@ -187,8 +167,7 @@ const AllbinBarContainer: AllbinBarContainerComponent = ({
                         </IconButton>
                         <Typography
                             className={classes.title}
-                            variant="h5"
-                            color="primary"
+                            variant="h6"
                         >
                             {title}
                         </Typography>
@@ -197,37 +176,59 @@ const AllbinBarContainer: AllbinBarContainerComponent = ({
 
                 <div className={classes.list}>
                     <List>
-                        <ListButton
-                            id={'changelog'}
-                            onClick={() => { }}
-                        />
+                        {(changelog || current_version) &&
+                            (
+                                <ListButton
+                                    id={'changelog'}
+                                    onClick={() => { setModalState("changelog"); }}
+                                />
+                            )
+                        }
+                        {show_contact_btn &&
+                            (
+                                <ListButton
+                                    id={'contact'}
+                                    onClick={() => { setModalState("contact"); }}
+                                />
+                            )
+                        }
                     </List>
                     <br />
                     <List className={classes.bottomList}>
-                        {show_credentials && window.sso && window.sso.isLoggedIn() &&
+                        {show_credentials && sso && sso.isLoggedIn() &&
                             (
-                                <ListItem>
-                                    <Typography>
-                                        {}
-                                    </Typography>
+                                <ListItem className={classes.credentials}>
+                                    <div style={{ width: '100%' }}>
+                                        <Typography variant="overline" align="right" display="block">
+                                            {text('logged_in_as')}
+                                        </Typography>
+                                        <Typography align="right" display="block" paragraph={true}>
+                                            {sso.getJWT().getClaim('username')}
+                                        </Typography>
+                                    </div>
                                 </ListItem>
                             )
                         }
-                        <ListItem
-                            className={classes.closeButton}
-                            button
-                            dense
-                            onClick={() => {
-                                if (window.sso) {
-                                    window.sso.logout(logout_redirect_url);
-                                }
-                            }}
-                        >
-                            <ListItemText primary={text('log_out')} />
-                        </ListItem>
+                        {show_dashboard_btn &&
+                            (
+                                <ListButton
+                                    id="to_dashboard"
+                                    color="blue"
+                                    onClick={() => onDashboard ? onDashboard(dashboard_redirect_url!) : window.location.href = dashboard_redirect_url!}
+                                />
+                            )
+                        }
+                        {show_logout_btn &&
+                            (
+                                <ListButton
+                                    id="logout"
+                                    color="red"
+                                    onClick={() => onLogout ? onLogout(logout_redirect_url!) : sso.logout(logout_redirect_url)}
+                                />
+                            )
+                        }
                     </List>
                 </div>
-                <div className={classes.background} />
             </Drawer>
             <Modal
                 open={modal_state !== 'hidden'}
@@ -251,7 +252,14 @@ const AllbinBarContainer: AllbinBarContainerComponent = ({
                                 borderRadius: 32,
                             }}
                         >
-                            {children}
+                            {modal_state === "changelog" &&
+                                (
+                                    <Changelog
+                                        current_version={current_version}
+                                        onClose={() => { setModalState('hidden'); }}
+                                    />
+                                )
+                            }
                         </Card>
                     </Grid>
                     <Grid item sm={1} md={1} lg={2} />
