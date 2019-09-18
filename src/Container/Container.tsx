@@ -19,7 +19,10 @@ import text from '../text';
 import ListButton from '../ListButton';
 
 import {
-    Changelog
+    About,
+    Changelog,
+    Contact,
+    Help,
     //     SaveModalContent,
     //     ShareModalContent,
     //     ExportModalContent,
@@ -46,17 +49,23 @@ interface AllbinBarProps {
     onLogout?: (logout_url: string) => void;
     /** Shows AllbinBar. Defaults to false. */
     open: boolean;
+    /** Displays and enables 'about'-button. Defaults to false. */
+    show_about_btn?: boolean;
     /** Displays and enables 'contact'-button. Defaults to true. */
     show_contact_btn?: boolean;
     /** Show what username was used to login. Defaults to true. */
     show_credentials?: boolean;
     /** Dispalys and enables a 'to dashboard'-button Defaults to true. */
     show_dashboard_btn?: boolean;
+    /** Displays and enables a 'help'-button. Defaults to false. */
+    show_help_btn?: boolean;
     /** Displays and enables a 'logout'-button. Defaults to true. */
     show_logout_btn?: boolean;
     /** Reference to window.sso. */
     sso: any;
     title: string;
+    /** Each string will be a separate paragraph in the 'about'-text. */
+    tool_info?: string[];
 }
 
 type AllbinBarContainerComponent = React.FunctionComponent<AllbinBarProps>;
@@ -115,7 +124,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 
-type ModalState = 'hidden' | 'changelog' | 'contact';
+type ModalState = 'hidden' | 'changelog' | 'contact' | 'about' | 'help';
 
 const AllbinBarContainer: AllbinBarContainerComponent = ({
     changelog,
@@ -126,20 +135,25 @@ const AllbinBarContainer: AllbinBarContainerComponent = ({
     onDashboard,
     onLogout,
     open,
+    show_about_btn,
     show_contact_btn,
     show_credentials,
     show_dashboard_btn,
+    show_help_btn,
     show_logout_btn,
     sso,
     title,
+    tool_info,
 }) => {
     let [modal_state, setModalState] = useState<ModalState>('hidden');
 
     dashboard_redirect_url = dashboard_redirect_url || 'https://dashboard.allbin.se';
     logout_redirect_url = logout_redirect_url || 'https://login.allbin.se';
+    show_about_btn = show_about_btn !== undefined ? show_about_btn : false;
     show_contact_btn = show_contact_btn !== undefined ? show_contact_btn : true;
-    show_dashboard_btn = show_dashboard_btn !== undefined ? show_dashboard_btn : true;
     show_credentials = show_credentials !== undefined ? show_credentials : true;
+    show_dashboard_btn = show_dashboard_btn !== undefined ? show_dashboard_btn : true;
+    show_help_btn = show_help_btn !== undefined ? show_help_btn : false;
     show_logout_btn = show_logout_btn !== undefined ? show_logout_btn : true;
 
     const classes = useStyles();
@@ -176,6 +190,14 @@ const AllbinBarContainer: AllbinBarContainerComponent = ({
 
                 <div className={classes.list}>
                     <List>
+                        {show_about_btn &&
+                            (
+                                <ListButton
+                                    id={'about'}
+                                    onClick={() => { setModalState("about"); }}
+                                />
+                            )
+                        }
                         {(changelog || current_version) &&
                             (
                                 <ListButton
@@ -189,6 +211,14 @@ const AllbinBarContainer: AllbinBarContainerComponent = ({
                                 <ListButton
                                     id={'contact'}
                                     onClick={() => { setModalState("contact"); }}
+                                />
+                            )
+                        }
+                        {show_help_btn &&
+                            (
+                                <ListButton
+                                    id={'help'}
+                                    onClick={() => { setModalState("help"); }}
                                 />
                             )
                         }
@@ -252,10 +282,33 @@ const AllbinBarContainer: AllbinBarContainerComponent = ({
                                 borderRadius: 32,
                             }}
                         >
+                            {modal_state === "about" &&
+                                (
+                                    <About
+                                        onClose={() => { setModalState('hidden'); }}
+                                        tool_title={title}
+                                        tool_info={tool_info}
+                                    />
+                                )
+                            }
                             {modal_state === "changelog" &&
                                 (
                                     <Changelog
                                         current_version={current_version}
+                                        onClose={() => { setModalState('hidden'); }}
+                                    />
+                                )
+                            }
+                            {modal_state === "contact" &&
+                                (
+                                    <Contact
+                                        onClose={() => { setModalState('hidden'); }}
+                                    />
+                                )
+                            }
+                            {modal_state === "help" &&
+                                (
+                                    <Help
                                         onClose={() => { setModalState('hidden'); }}
                                     />
                                 )

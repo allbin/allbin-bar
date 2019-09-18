@@ -16,7 +16,7 @@ interface Props {
 
 const useStyles = makeStyles();
 
-const Contact = ({ onClose }: Props) => {
+const Help = ({ onClose }: Props) => {
     const classes = useStyles();
 
     return (
@@ -24,7 +24,7 @@ const Contact = ({ onClose }: Props) => {
             <AppBar className={classes.appBar} position="static" elevation={0}>
                 <Toolbar variant="dense" className={classes.toolBar}>
                     <Typography variant="h5" color="inherit">
-                        {text('contact')}
+                        {text('help')}
                     </Typography>
                 </Toolbar>
             </AppBar>
@@ -33,7 +33,7 @@ const Contact = ({ onClose }: Props) => {
                     <Grid item xs={12} sm={12}>
                         <div className={`${classes.paper_body} --padding`}>
                             <Typography variant="body2" paragraph>
-                                {/* //TODO: implement contact info */}
+                                {/* //TODO: implement help */}
                                 Not yet implemented.
                             </Typography>
                             <div className={classes.button_bar}>
@@ -54,4 +54,4 @@ const Contact = ({ onClose }: Props) => {
     );
 };
 
-export default Contact;
+export default Help;

@@ -12,11 +12,13 @@ import text from '../text';
 
 interface Props {
     onClose: () => void;
+    tool_info?: string[];
+    tool_title: string;
 }
 
 const useStyles = makeStyles();
 
-const Contact = ({ onClose }: Props) => {
+const About = ({ onClose, tool_info, tool_title }: Props) => {
     const classes = useStyles();
 
     return (
@@ -24,7 +26,7 @@ const Contact = ({ onClose }: Props) => {
             <AppBar className={classes.appBar} position="static" elevation={0}>
                 <Toolbar variant="dense" className={classes.toolBar}>
                     <Typography variant="h5" color="inherit">
-                        {text('contact')}
+                        {text('about') + " " + tool_title}
                     </Typography>
                 </Toolbar>
             </AppBar>
@@ -33,9 +35,19 @@ const Contact = ({ onClose }: Props) => {
                     <Grid item xs={12} sm={12}>
                         <div className={`${classes.paper_body} --padding`}>
                             <Typography variant="body2" paragraph>
-                                {/* //TODO: implement contact info */}
-                                Not yet implemented.
+                                {text('company_info_1')}
                             </Typography>
+                            <Typography variant="body2" paragraph>
+                                {text('company_info_2')}
+                            </Typography>
+                            <Typography variant="body2" paragraph>
+                                {text('company_info_3')}
+                            </Typography>
+                            {tool_info && tool_info.map((info, index) => (
+                                <Typography key={index} variant="body2" paragraph>
+                                    {info}
+                                </Typography>
+                            ))}
                             <div className={classes.button_bar}>
                                 <Button
                                     variant="contained"
@@ -54,4 +66,4 @@ const Contact = ({ onClose }: Props) => {
     );
 };
 
-export default Contact;
+export default About;

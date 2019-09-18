@@ -53,7 +53,7 @@ const dictionary: TypedDictionary<Dictionary> = {
             staden. Vi tror på kraften i att experimentera med många olika sensorer och pilotprojekt för att skapa
             underlag för större investeringar och upphandlingar när man påvisat värde och fått med fler på tåget.
             SenseViews syfte är att underlätta och visuellt visa upp de pågående pilotprojekt som en stad genomför.`,
-        contact: 'kontakt',
+        contact: 'kontakta',
         current_version: 'nuvarande version',
         email_us: 'skicka epost till oss',
         email: 'epost',

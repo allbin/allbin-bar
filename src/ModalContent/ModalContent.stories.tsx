@@ -3,6 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { Modal, Grid, Card } from '@material-ui/core';
 import { Changelog, Contact } from './';
 import { action } from '@storybook/addon-actions';
+import About from './About';
 
 const WrappedModalContent: FunctionComponent = ({ children }) => {
     return (
@@ -27,6 +28,15 @@ const WrappedModalContent: FunctionComponent = ({ children }) => {
 };
 
 storiesOf('ModalContent', module)
+    .add('About', () => (
+        <WrappedModalContent>
+            <About
+                onClose={action('changelog close')}
+                tool_info={["dummy tool info 1", "dummy tool info 2"]}
+                tool_title="tool title"
+            />
+        </WrappedModalContent>
+    ))
     .add('Changelog', () => (
         <WrappedModalContent>
             <Changelog

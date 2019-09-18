@@ -17,7 +17,11 @@ storiesOf('AllbinBar', module)
             sso={sso}
             open={true}
             onClose={action("onClose")}
+            onDashboard={action("onDashboard")}
             title="AllbinBar dev tester"
             current_version="v1.0.1"
+            show_about_btn={true}
+            show_help_btn={true}
+            tool_info={["dummy tool information 1", "dummy tool information 2"]}
         />
     ));
