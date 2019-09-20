@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-    AppBar,
-    Toolbar,
-    Typography,
-    Grid,
-    Button,
-} from '@material-ui/core';
+import { AppBar, Toolbar, Typography, Grid, Button } from '@material-ui/core';
 import makeStyles from './styles';
 
 import text from '../text';

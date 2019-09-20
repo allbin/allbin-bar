@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-    AppBar,
-    Toolbar,
-    Typography,
-    Grid,
-    Button,
-} from '@material-ui/core';
+import { AppBar, Toolbar, Typography, Grid, Button } from '@material-ui/core';
 import makeStyles from './styles';
 
 import text from '../text';
@@ -26,7 +20,7 @@ const About = ({ onClose, tool_info, tool_title }: Props) => {
             <AppBar className={classes.appBar} position="static" elevation={0}>
                 <Toolbar variant="dense" className={classes.toolBar}>
                     <Typography variant="h5" color="inherit">
-                        {text('about') + " " + tool_title}
+                        {text('about') + ' ' + tool_title}
                     </Typography>
                 </Toolbar>
             </AppBar>
@@ -43,11 +37,16 @@ const About = ({ onClose, tool_info, tool_title }: Props) => {
                             <Typography variant="body2" paragraph>
                                 {text('company_info_3')}
                             </Typography>
-                            {tool_info && tool_info.map((info, index) => (
-                                <Typography key={index} variant="body2" paragraph>
-                                    {info}
-                                </Typography>
-                            ))}
+                            {tool_info &&
+                                tool_info.map((info, index) => (
+                                    <Typography
+                                        key={index}
+                                        variant="body2"
+                                        paragraph
+                                    >
+                                        {info}
+                                    </Typography>
+                                ))}
                             <div className={classes.button_bar}>
                                 <Button
                                     variant="contained"
