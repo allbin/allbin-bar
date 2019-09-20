@@ -1,6 +1,6 @@
 import { configure, addParameters } from '@storybook/react';
 import oh from 'output-helpers';
-import { dictionary } from '../src/text';
+//import { dictionary } from '../src/text';
 
 if (!(window as any).has_run) {
     oh.setConfig({

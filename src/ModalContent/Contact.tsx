@@ -1,5 +1,12 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography, Grid, Button } from '@material-ui/core';
+import {
+    AppBar,
+    Toolbar,
+    Typography,
+    Grid,
+    Button,
+    Link,
+} from '@material-ui/core';
 import makeStyles from './styles';
 
 import text from '../text';
@@ -24,12 +31,24 @@ const Contact = ({ onClose }: Props) => {
             </AppBar>
             <div className={classes.body}>
                 <Grid container>
-                    <Grid item xs={12} sm={12}>
+                    <Grid item xs={12} sm={3}>
+                        <div
+                            className={classes.guidePanelBody + ' --about'}
+                        ></div>
+                    </Grid>
+                    <Grid item xs={12} sm={9}>
                         <div className={`${classes.paper_body} --padding`}>
+                            <Typography variant="h6">All Binary</Typography>
                             <Typography variant="body2" paragraph>
-                                {/* //TODO: implement contact info */}
-                                Not yet implemented.
+                                {text('contact_text')}
                             </Typography>
+                            <Link
+                                component="a"
+                                href="https://allbinary.se"
+                                variant="body2"
+                            >
+                                https://allbinary.se
+                            </Link>
                             <div className={classes.button_bar}>
                                 <Button
                                     variant="contained"
@@ -38,6 +57,15 @@ const Contact = ({ onClose }: Props) => {
                                     onClick={() => onClose()}
                                 >
                                     {text('close')}
+                                </Button>
+                                <Button
+                                    color="primary"
+                                    variant="contained"
+                                    size="large"
+                                    className={classes.button}
+                                    href="mailto:info@allbinary.se"
+                                >
+                                    {text('email_us')}
                                 </Button>
                             </div>
                         </div>

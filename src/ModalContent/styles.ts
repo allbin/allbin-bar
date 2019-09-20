@@ -1,4 +1,5 @@
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
+import aboutImage from '../images/allbinary-about.jpg';
 
 const borderRadius = '4px';
 const modalHeightXS = 400;
@@ -31,6 +32,10 @@ export default () =>
                 height: modalHeightXS,
                 [theme.breakpoints.up('md')]: {
                     height: modalHeightLG,
+                },
+                '&.--about': {
+                    backgroundImage: 'url(' + aboutImage + ')',
+                    backgroundSize: 'cover',
                 },
             },
             paper_body: {
