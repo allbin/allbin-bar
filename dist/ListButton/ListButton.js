@@ -1,60 +1,74 @@
 import React from 'react';
 import { createStyles, ListItem, ListItemIcon, ListItemText, makeStyles, } from '@material-ui/core';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import ShareIcon from '@material-ui/icons/Share';
-import SaveIcon from '@material-ui/icons/Save';
-import ExportIcon from '@material-ui/icons/Print';
-import InfoIcon from '@material-ui/icons/Info';
-import PresentationIcon from '@material-ui/icons/Fullscreen';
+import { Info, Inbox, Help, Call, ChromeReaderMode } from '@material-ui/icons';
 import text from '../text';
-const border_radius = 4;
-const colors = {
-    blue: ['#3f51b5', '#fff'],
-    red: ['#992132', '#fff'],
-};
 const useStyles = makeStyles((theme) => createStyles({
     container: {},
     listItem: {
-        borderRadius: border_radius,
+        display: 'inline-flex',
+        width: 'fit-content',
+        borderRadius: 0,
         padding: theme.spacing(1, 2),
-        marginTop: (props) => props.color ? theme.spacing(1) : 0,
-        backgroundColor: (props) => props.color ? colors[props.color][0] : undefined,
+        flexDirection: 'row-reverse',
+        marginBottom: theme.spacing(2),
+        opacity: 0.6,
+        backgroundColor: 'transparent',
+        '& .border': {
+            height: 5,
+            backgroundColor: '#fff',
+            position: 'absolute',
+            bottom: 0,
+            right: 0,
+            width: 0,
+            opacity: 0.5,
+            transition: 'all 0.3s',
+            pointerEvents: 'none',
+        },
+        '&.active': {
+            opacity: 1,
+            '& .border': { width: '100%', opacity: 1 },
+        },
         '&:HOVER': {
-            backgroundColor: 'rgb(180,180,180)',
-            '& span': {
-                color: '#fff',
-            },
-            '& p': {
-                color: '#fff !important',
-            },
+            backgroundColor: 'transparent',
+            opacity: 1,
+            '& .border': { width: '100px' },
         },
         '& span': {
-            color: (props) => props.color ? colors[props.color][1] : 'rgb(65, 61, 73)',
-            fontSize: 14,
+            color: '#fff',
+            marginRight: theme.spacing(4),
+            fontSize: 36,
+            fontWeight: 'bold',
         },
-    }
+    },
+    icon: {
+        color: '#fff',
+        '& svg': {
+            width: 34,
+            height: 34,
+            opacity: 0.5,
+        },
+    },
 }));
 function getIcon(name) {
     switch (name) {
         case 'help':
-            return React.createElement(SaveIcon, null);
+            return React.createElement(Help, null);
         case 'contact':
-            return React.createElement(ShareIcon, null);
+            return React.createElement(Call, null);
         case 'changelog':
-            return React.createElement(ExportIcon, null);
-        case 'to_dashboard':
-            return React.createElement(PresentationIcon, null);
+            return React.createElement(ChromeReaderMode, null);
         case 'about':
-            return React.createElement(InfoIcon, null);
+            return React.createElement(Info, null);
         default:
-            return React.createElement(InboxIcon, null);
+            return React.createElement(Inbox, null);
     }
 }
-const ListButton = ({ id, onClick, onMouseEnter, onMouseLeave, color }) => {
-    const classes = useStyles({ color });
-    return (React.createElement(ListItem, { className: classes.listItem, button: true, dense: true, onClick: () => onClick(id), onMouseEnter: () => onMouseEnter ? onMouseEnter(id) : undefined, onMouseLeave: () => onMouseLeave ? onMouseLeave(id) : undefined },
-        React.createElement(ListItemIcon, null, getIcon(id)),
-        React.createElement(ListItemText, { primary: text(id) })));
+const ListButton = ({ id, onClick, onMouseEnter, onMouseLeave, active, }) => {
+    const classes = useStyles();
+    return (React.createElement(ListItem, { className: `${classes.listItem} ${active ? 'active' : ''}`, button: true, disableRipple: true, onClick: () => onClick(id), onMouseEnter: () => (onMouseEnter ? onMouseEnter(id) : undefined), onMouseLeave: () => (onMouseLeave ? onMouseLeave(id) : undefined) },
+        React.createElement(ListItemIcon, { className: classes.icon }, getIcon(id)),
+        React.createElement(ListItemText, { primary: text(id) }),
+        React.createElement("div", { className: "border" })));
 };
 export default ListButton;
 
