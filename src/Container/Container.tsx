@@ -104,6 +104,9 @@ const useStyles = makeStyles((theme: Theme) =>
             flexDirection: 'column',
             alignItems: 'flex-end',
             marginTop: theme.spacing(20),
+            [theme.breakpoints.down('lg')]: {
+                marginTop: theme.spacing(10),
+            },
         },
         userActions: {
             alignItems: 'center',
