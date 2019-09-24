@@ -35,6 +35,9 @@ const useStyles = makeStyles((theme) => createStyles({
         flexDirection: 'column',
         alignItems: 'flex-end',
         marginTop: theme.spacing(20),
+        [theme.breakpoints.down('lg')]: {
+            marginTop: theme.spacing(10),
+        },
     },
     userActions: {
         alignItems: 'center',
@@ -93,7 +96,6 @@ const useStyles = makeStyles((theme) => createStyles({
 }));
 const AllbinBarContainer = ({ changelog, current_version, dashboard_redirect_url, logout_redirect_url, onClose, onDashboard, onLogout, open, show_about_btn, show_contact_btn, show_credentials, show_dashboard_btn, show_help_btn, show_logout_btn, sso, title, tool_info, }) => {
     let [modal_state, setModalState] = useState('hidden');
-    let [selected_list_item, setSelectedListItem] = useState('');
     dashboard_redirect_url =
         dashboard_redirect_url || 'https://dashboard.allbin.se';
     logout_redirect_url = logout_redirect_url || 'https://login.allbin.se';
@@ -106,27 +108,29 @@ const AllbinBarContainer = ({ changelog, current_version, dashboard_redirect_url
     show_logout_btn = show_logout_btn !== undefined ? show_logout_btn : true;
     const classes = useStyles();
     return (React.createElement("div", { className: classes.container },
-        React.createElement(Drawer, { open: open, onClose: () => onClose(), className: classes.drawer },
+        React.createElement(Drawer, { open: open, onClose: () => {
+                setModalState('hidden');
+                onClose();
+            }, className: classes.drawer },
             React.createElement(AppBar, { position: "static", className: classes.appBar, elevation: 0 },
                 React.createElement(Toolbar, { className: classes.toolBar },
                     React.createElement(Typography, { className: classes.title, variant: "h6" }, title)),
-                React.createElement(IconButton, { className: classes.menuButton, color: "primary", "aria-label": "Menu", onClick: () => onClose() },
+                React.createElement(IconButton, { className: classes.menuButton, color: "primary", "aria-label": "Menu", onClick: () => {
+                        setModalState('hidden');
+                        onClose();
+                    } },
                     React.createElement(CloseIcon, null))),
             React.createElement(List, { className: classes.list },
-                show_about_btn && (React.createElement(ListButton, { active: selected_list_item === 'about', id: 'about', onClick: () => {
-                        setSelectedListItem('about');
+                show_about_btn && (React.createElement(ListButton, { active: modal_state === 'about', id: 'about', onClick: () => {
                         setModalState('about');
                     } })),
-                (changelog || current_version) && (React.createElement(ListButton, { active: selected_list_item === 'changelog', id: 'changelog', onClick: () => {
-                        setSelectedListItem('changelog');
+                (changelog || current_version) && (React.createElement(ListButton, { active: modal_state === 'changelog', id: 'changelog', onClick: () => {
                         setModalState('changelog');
                     } })),
-                show_contact_btn && (React.createElement(ListButton, { active: selected_list_item === 'contact', id: 'contact', onClick: () => {
-                        setSelectedListItem('contact');
+                show_contact_btn && (React.createElement(ListButton, { active: modal_state === 'contact', id: 'contact', onClick: () => {
                         setModalState('contact');
                     } })),
-                show_help_btn && (React.createElement(ListButton, { active: selected_list_item === 'help', id: 'help', onClick: () => {
-                        setSelectedListItem('help');
+                show_help_btn && (React.createElement(ListButton, { active: modal_state === 'help', id: 'help', onClick: () => {
                         setModalState('help');
                     } }))),
             React.createElement("div", { className: classes.bottomList },
@@ -154,19 +158,15 @@ const AllbinBarContainer = ({ changelog, current_version, dashboard_redirect_url
                     React.createElement(Grid, { item: true, sm: 10, md: 10, lg: 8, style: { backgroundColor: 'transparent' } },
                         React.createElement(Card, { className: classes.modalCard },
                             modal_state === 'about' && (React.createElement(About, { onClose: () => {
-                                    setSelectedListItem('');
                                     setModalState('hidden');
                                 }, tool_title: title, tool_info: tool_info })),
                             modal_state === 'changelog' && (React.createElement(Changelog, { current_version: current_version, onClose: () => {
-                                    setSelectedListItem('');
                                     setModalState('hidden');
                                 } })),
                             modal_state === 'contact' && (React.createElement(Contact, { onClose: () => {
-                                    setSelectedListItem('');
                                     setModalState('hidden');
                                 } })),
                             modal_state === 'help' && (React.createElement(Help, { onClose: () => {
-                                    setSelectedListItem('');
                                     setModalState('hidden');
                                 } })))),
                     React.createElement(Grid, { item: true, sm: 1, md: 1, lg: 2 }))))));

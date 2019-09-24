@@ -79,10 +79,11 @@ export default () => makeStyles((theme) => createStyles({
         flexDirection: 'row-reverse',
         [theme.breakpoints.down('lg')]: {
             position: 'fixed',
+            width: 'calc(100% - 580px)',
             bottom: 0,
-            left: 0,
+            left: 'unset',
             right: 0,
-            padding: theme.spacing(2, 3),
+            padding: 0,
         },
     },
     button: {
