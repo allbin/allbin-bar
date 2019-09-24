@@ -203,7 +203,10 @@ const AllbinBarContainer: AllbinBarContainerComponent = ({
         <div className={classes.container}>
             <Drawer
                 open={open}
-                onClose={() => onClose()}
+                onClose={() => {
+                    setModalState('hidden');
+                    onClose();
+                }}
                 className={classes.drawer}
             >
                 <AppBar
@@ -220,7 +223,10 @@ const AllbinBarContainer: AllbinBarContainerComponent = ({
                         className={classes.menuButton}
                         color="primary"
                         aria-label="Menu"
-                        onClick={() => onClose()}
+                        onClick={() => {
+                            setModalState('hidden');
+                            onClose();
+                        }}
                     >
                         <CloseIcon />
                     </IconButton>
