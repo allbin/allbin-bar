@@ -1,5 +1,5 @@
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
-import aboutImage from '../images/allbinary-about.jpg';
+import aboutImage from '../img/allbinary-about.jpg';
 
 const modalHeightXS = 400;
 const modalHeightLG = 500;
