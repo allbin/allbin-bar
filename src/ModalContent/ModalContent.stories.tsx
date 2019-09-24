@@ -32,7 +32,7 @@ storiesOf('ModalContent', module)
         <WrappedModalContent>
             <About
                 onClose={action('changelog close')}
-                tool_info={["dummy tool info 1", "dummy tool info 2"]}
+                tool_info={['dummy tool info 1', 'dummy tool info 2']}
                 tool_title="tool title"
             />
         </WrappedModalContent>
@@ -42,7 +42,7 @@ storiesOf('ModalContent', module)
             <Changelog
                 onClose={action('changelog close')}
                 current_version="v1.0.1"
-                changelog={"not_yet_implemented"}
+                changelog={'not_yet_implemented'}
             />
         </WrappedModalContent>
     ))
@@ -56,8 +56,6 @@ storiesOf('ModalContent', module)
     ))
     .add('Contact', () => (
         <WrappedModalContent>
-            <Contact
-                onClose={action('contact close')}
-            />
+            <Contact onClose={action('contact close')} />
         </WrappedModalContent>
     ));

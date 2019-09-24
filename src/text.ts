@@ -1,6 +1,8 @@
 import oh, { TypedDictionary } from 'output-helpers';
 
 type Keys =
+    | 'allbin'
+    | 'allbin_link_text'
     | 'about'
     | 'a_tool_by_allbin'
     | 'account_information'
@@ -13,6 +15,7 @@ type Keys =
     | 'company_info_2'
     | 'company_info_3'
     | 'contact'
+    | 'contact_text'
     | 'current_version'
     | 'email_us'
     | 'email'
@@ -36,6 +39,8 @@ export type Dictionary = { [key in Keys]: string };
 const dictionary: TypedDictionary<Dictionary> = {
     // 'prefix': 'allbin_bar_',
     'sv-SE': {
+        allbin: "All Binary",
+        allbin_link_text: "https://www.allbinary.se",
         about: 'om verktyget',
         a_tool_by_allbin: 'ett verktyg av All Binary',
         account_information: 'kontoinformation',
@@ -53,7 +58,8 @@ const dictionary: TypedDictionary<Dictionary> = {
             staden. Vi tror på kraften i att experimentera med många olika sensorer och pilotprojekt för att skapa
             underlag för större investeringar och upphandlingar när man påvisat värde och fått med fler på tåget.
             SenseViews syfte är att underlätta och visuellt visa upp de pågående pilotprojekt som en stad genomför.`,
-        contact: 'kontakta',
+        contact: 'kontakt',
+        contact_text: 'Att resa tillsammans har aldrig varit viktigare. Vi underlättar analys och planering av kollektivtrafiken genom att visualisera data från realtidssystem och biljettsystem samt skapar verktyg för inventering av hållplatser och ärendehantering.',
         current_version: 'nuvarande version',
         email_us: 'skicka epost till oss',
         email: 'epost',
@@ -73,6 +79,8 @@ const dictionary: TypedDictionary<Dictionary> = {
     },
     'en-US': {
         //UI
+        allbin: "All Binary",
+        allbin_link_text: 'https://www.allbinary.se',
         about: 'about the tool',
         a_tool_by_allbin: 'a tool by All Binary',
         account_information: 'account information',
@@ -90,6 +98,7 @@ const dictionary: TypedDictionary<Dictionary> = {
             become smarter. We believe in the power of experimenting with different sensors and pilots before investing
             in bigger systems. It is important to get more people onboard and with SenseView it is easier to show what is ongoing in the smart city or industry.`,
         contact: 'contact',
+        contact_text: 'Traveling together has never been more important. We facilitate the analysis and planning of public transport by visualizing data from real-time systems and ticket systems, as well as creating tools for inventory of stops and case management.',
         current_version: 'current version',
         email_us: 'email us',
         email: 'email',

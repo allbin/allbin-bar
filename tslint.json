@@ -1,8 +1,5 @@
 {
-    "extends": [
-        "tslint-eslint-rules",
-        "tslint-react"
-    ],
+    "extends": ["tslint-eslint-rules", "tslint-react"],
     "rules": {
         "jsx-no-lambda": false,
         "no-string-throw": true,
@@ -19,14 +16,8 @@
         "triple-equals": {
             "severity": "error"
         },
-        "one-variable-per-declaration": [
-            true,
-            "ignore-for-loop"
-        ],
-        "ter-arrow-parens": [
-            true,
-            "as-needed"
-        ],
+        "one-variable-per-declaration": [true, "ignore-for-loop"],
+        "ter-arrow-parens": [true, "as-needed"],
         "ter-arrow-spacing": [
             true,
             {
@@ -35,18 +26,13 @@
             }
         ],
         "array-bracket-spacing": {
-            "options": [
-                "never"
-            ],
+            "options": ["never"],
             "severity": "error"
         },
         "new-parens": {
             "severity": "error"
         },
-        "no-cond-assign": [
-            "warn",
-            "always"
-        ],
+        "no-cond-assign": ["warn", "always"],
         "no-control-regex": {
             "severity": "error"
         },
@@ -85,33 +71,10 @@
             "warn",
             {
                 "groups": [
-                    [
-                        "&",
-                        "|",
-                        "^",
-                        "~",
-                        "<<",
-                        ">>",
-                        ">>>"
-                    ],
-                    [
-                        "==",
-                        "!=",
-                        "===",
-                        "!==",
-                        ">",
-                        ">=",
-                        "<",
-                        "<="
-                    ],
-                    [
-                        "&&",
-                        "||"
-                    ],
-                    [
-                        "in",
-                        "instanceof"
-                    ]
+                    ["&", "|", "^", "~", "<<", ">>", ">>>"],
+                    ["==", "!=", "===", "!==", ">", ">=", "<", "<="],
+                    ["&&", "||"],
+                    ["in", "instanceof"]
                 ],
                 "allowSamePrecedence": false
             }
@@ -139,9 +102,7 @@
         "jsx-boolean-value": false
     },
     "defaultSeverity": "warning",
-    "exclude": [
-        "*./tmp/"
-    ],
+    "exclude": ["*./tmp/"],
     "linterOptions": {
         "exclude": [
             "config/**/*.js",
