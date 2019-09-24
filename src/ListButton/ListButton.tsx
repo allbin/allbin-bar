@@ -7,20 +7,9 @@ import {
   makeStyles,
   Theme
 } from "@material-ui/core";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import ShareIcon from "@material-ui/icons/Share";
-import SaveIcon from "@material-ui/icons/Save";
-import ExportIcon from "@material-ui/icons/Print";
-import InfoIcon from "@material-ui/icons/Info";
-import PresentationIcon from "@material-ui/icons/Fullscreen";
+import { Info, Inbox, Help, Call, ChromeReaderMode } from "@material-ui/icons";
 import text from "../text";
 import { ButtonID } from "..";
-
-// import {
-//     SaveModalContent,
-//     ShareModalContent,
-//     ExportModalContent,
-// } from './ModalContent';
 
 declare global {
   interface Window {
@@ -75,17 +64,15 @@ const useStyles = makeStyles((theme: Theme) =>
 function getIcon(name: ButtonID) {
   switch (name) {
     case "help":
-      return <SaveIcon />;
+      return <Help />;
     case "contact":
-      return <ShareIcon />;
+      return <Call />;
     case "changelog":
-      return <ExportIcon />;
-    case "to_dashboard":
-      return <PresentationIcon />;
+      return <ChromeReaderMode />;
     case "about":
-      return <InfoIcon />;
+      return <Info />;
     default:
-      return <InboxIcon />;
+      return <Inbox />;
   }
 }
 
