@@ -198,7 +198,6 @@ const AllbinBarContainer: AllbinBarContainerComponent = ({
     show_logout_btn = show_logout_btn !== undefined ? show_logout_btn : true;
 
     const classes = useStyles();
-    console.log(sso.getJWT());
 
     return (
         <div className={classes.container}>
