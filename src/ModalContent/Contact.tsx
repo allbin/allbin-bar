@@ -49,7 +49,7 @@ const Contact = ({ onClose }: Props) => {
                                 href="https://www.allbinary.se"
                                 variant="body2"
                             >
-                                {text('allbin_link_text')}
+                                {text('allbin_link_text', false)}
                             </Link>
                             <div className={classes.button_bar}>
                                 <Button
