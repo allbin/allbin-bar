@@ -19,6 +19,7 @@ declare global {
 
 interface ListButtonProps {
   id: ButtonID;
+  active?: boolean;
   onClick: (id: ButtonID) => void;
   onMouseEnter?: (id: ButtonID) => void;
   onMouseLeave?: (id: ButtonID) => void;
@@ -29,19 +30,32 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {},
     listItem: {
+      display: "inline-flex",
+      width: "fit-content",
       borderRadius: 0,
       padding: theme.spacing(1, 2),
       flexDirection: "row-reverse",
-      textAlign: "right",
-      marginBottom: theme.spacing(3),
+      marginBottom: theme.spacing(2),
+      opacity: 0.8,
       backgroundColor: "transparent",
+      "& .border": {
+        height: 5,
+        backgroundColor: "#fff",
+        position: "absolute",
+        bottom: 0,
+        right: 0,
+        width: 0,
+        transition: "width 0.3s",
+        pointerEvents: "none"
+      },
+      "&.active": {
+        opacity: 1,
+        "& .border": { width: "100%" }
+      },
       "&:HOVER": {
-        "& span": {
-          color: "#fff"
-        },
-        "& p": {
-          color: "#fff !important"
-        }
+        backgroundColor: "transparent",
+        opacity: 1,
+        "& .border": { width: "100px" }
       },
       "& span": {
         color: "#fff",
@@ -80,13 +94,14 @@ const ListButton: ListButtonComponent = ({
   id,
   onClick,
   onMouseEnter,
-  onMouseLeave
+  onMouseLeave,
+  active
 }) => {
   const classes = useStyles();
 
   return (
     <ListItem
-      className={classes.listItem}
+      className={`${classes.listItem} ${active ? "active" : ""}`}
       button
       onClick={() => onClick(id)}
       onMouseEnter={() => (onMouseEnter ? onMouseEnter(id) : undefined)}
@@ -94,6 +109,7 @@ const ListButton: ListButtonComponent = ({
     >
       <ListItemIcon className={classes.icon}>{getIcon(id)}</ListItemIcon>
       <ListItemText primary={text(id)} />
+      <div className="border" />
     </ListItem>
   );
 };

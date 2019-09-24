@@ -100,7 +100,9 @@ const useStyles = makeStyles((theme: Theme) =>
       }
     },
     list: {
-      width: "100%",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "flex-end",
       marginTop: theme.spacing(20)
     },
     userActions: {
@@ -166,6 +168,7 @@ const AllbinBarContainer: AllbinBarContainerComponent = ({
   tool_info
 }) => {
   let [modal_state, setModalState] = useState<ModalState>("hidden");
+  let [selected_list_item, setSelectedListItem] = useState("");
 
   dashboard_redirect_url =
     dashboard_redirect_url || "https://dashboard.allbin.se";
@@ -200,101 +203,107 @@ const AllbinBarContainer: AllbinBarContainerComponent = ({
           </IconButton>
         </AppBar>
 
-        <div className={classes.list}>
-          <List>
-            {show_about_btn && (
-              <ListButton
-                id={"about"}
-                onClick={() => {
-                  setModalState("about");
-                }}
-              />
-            )}
-            {(changelog || current_version) && (
-              <ListButton
-                id={"changelog"}
-                onClick={() => {
-                  setModalState("changelog");
-                }}
-              />
-            )}
-            {show_contact_btn && (
-              <ListButton
-                id={"contact"}
-                onClick={() => {
-                  setModalState("contact");
-                }}
-              />
-            )}
-            {show_help_btn && (
-              <ListButton
-                id={"help"}
-                onClick={() => {
-                  setModalState("help");
-                }}
-              />
-            )}
-          </List>
-          <div className={classes.bottomList}>
-            <Grid container>
-              <Grid item xs={6}>
-                {show_credentials && sso && sso.isLoggedIn() && (
-                  <ListItem className={classes.credentials}>
-                    <div style={{ width: "100%" }}>
-                      <Typography variant="overline" display="block">
-                        {text("logged_in_as")}
-                      </Typography>
-                      <Typography variant="h5" display="block">
-                        {sso.getJWT().getClaim("username")}
-                      </Typography>
-                    </div>
-                  </ListItem>
+        <List className={classes.list}>
+          {show_about_btn && (
+            <ListButton
+              active={selected_list_item === "about"}
+              id={"about"}
+              onClick={() => {
+                setSelectedListItem("about");
+                setModalState("about");
+              }}
+            />
+          )}
+          {(changelog || current_version) && (
+            <ListButton
+              active={selected_list_item === "changelog"}
+              id={"changelog"}
+              onClick={() => {
+                setSelectedListItem("changelog");
+                setModalState("changelog");
+              }}
+            />
+          )}
+          {show_contact_btn && (
+            <ListButton
+              active={selected_list_item === "contact"}
+              id={"contact"}
+              onClick={() => {
+                setSelectedListItem("contact");
+                setModalState("contact");
+              }}
+            />
+          )}
+          {show_help_btn && (
+            <ListButton
+              active={selected_list_item === "help"}
+              id={"help"}
+              onClick={() => {
+                setSelectedListItem("help");
+                setModalState("help");
+              }}
+            />
+          )}
+        </List>
+        <div className={classes.bottomList}>
+          <Grid container>
+            <Grid item xs={6}>
+              {show_credentials && sso && sso.isLoggedIn() && (
+                <ListItem className={classes.credentials}>
+                  <div style={{ width: "100%" }}>
+                    <Typography variant="overline" display="block">
+                      {text("logged_in_as")}
+                    </Typography>
+                    <Typography variant="h5" display="block">
+                      {sso.getJWT().getClaim("username")}
+                    </Typography>
+                  </div>
+                </ListItem>
+              )}
+            </Grid>
+            <Grid item xs={6} className={classes.userActions}>
+              <Grid
+                container
+                direction="column"
+                justify="flex-end"
+                alignItems="flex-end"
+              >
+                {show_dashboard_btn && (
+                  <Grid item xs={12}>
+                    <Typography
+                      gutterBottom
+                      className={classes.userAction}
+                      id="to_dashboard"
+                      align="right"
+                      onClick={() =>
+                        onDashboard
+                          ? onDashboard(dashboard_redirect_url!)
+                          : (window.location.href = dashboard_redirect_url!)
+                      }
+                    >
+                      {text("to_dashboard")}
+                    </Typography>
+                  </Grid>
+                )}
+                {show_logout_btn && (
+                  <Grid item xs={12}>
+                    <Typography
+                      className={classes.userAction}
+                      id="logout"
+                      align="right"
+                      onClick={() =>
+                        onLogout
+                          ? onLogout(logout_redirect_url!)
+                          : sso.logout(logout_redirect_url)
+                      }
+                    >
+                      {text("logout")}
+                    </Typography>
+                  </Grid>
                 )}
               </Grid>
-              <Grid item xs={6} className={classes.userActions}>
-                <Grid
-                  container
-                  direction="column"
-                  justify="flex-end"
-                  alignItems="flex-end"
-                >
-                  {show_dashboard_btn && (
-                    <Grid item xs={12}>
-                      <Typography
-                        gutterBottom
-                        className={classes.userAction}
-                        id="to_dashboard"
-                        align="right"
-                        onClick={() =>
-                          onDashboard
-                            ? onDashboard(dashboard_redirect_url!)
-                            : (window.location.href = dashboard_redirect_url!)
-                        }
-                      >
-                        {text("to_dashboard")}
-                      </Typography>
-                    </Grid>
-                  )}
-                  {show_logout_btn && (
-                    <Grid item xs={12}>
-                      <Typography
-                        className={classes.userAction}
-                        id="logout"
-                        align="right"
-                        onClick={() =>
-                          onLogout
-                            ? onLogout(logout_redirect_url!)
-                            : sso.logout(logout_redirect_url)
-                        }
-                      >
-                        {text("logout")}
-                      </Typography>
-                    </Grid>
-                  )}
-                </Grid>
-              </Grid>
             </Grid>
-          </div>
+          </Grid>
         </div>
       </Drawer>
       <Modal
