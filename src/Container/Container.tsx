@@ -184,7 +184,6 @@ const AllbinBarContainer: AllbinBarContainerComponent = ({
     tool_info,
 }) => {
     let [modal_state, setModalState] = useState<ModalState>('hidden');
-    let [selected_list_item, setSelectedListItem] = useState('');
 
     dashboard_redirect_url =
         dashboard_redirect_url || 'https://dashboard.allbin.se';
@@ -235,40 +234,36 @@ const AllbinBarContainer: AllbinBarContainerComponent = ({
                 <List className={classes.list}>
                     {show_about_btn && (
                         <ListButton
-                            active={selected_list_item === 'about'}
+                            active={modal_state === 'about'}
                             id={'about'}
                             onClick={() => {
-                                setSelectedListItem('about');
                                 setModalState('about');
                             }}
                         />
                     )}
                     {(changelog || current_version) && (
                         <ListButton
-                            active={selected_list_item === 'changelog'}
+                            active={modal_state === 'changelog'}
                             id={'changelog'}
                             onClick={() => {
-                                setSelectedListItem('changelog');
                                 setModalState('changelog');
                             }}
                         />
                     )}
                     {show_contact_btn && (
                         <ListButton
-                            active={selected_list_item === 'contact'}
+                            active={modal_state === 'contact'}
                             id={'contact'}
                             onClick={() => {
-                                setSelectedListItem('contact');
                                 setModalState('contact');
                             }}
                         />
                     )}
                     {show_help_btn && (
                         <ListButton
-                            active={selected_list_item === 'help'}
+                            active={modal_state === 'help'}
                             id={'help'}
                             onClick={() => {
-                                setSelectedListItem('help');
                                 setModalState('help');
                             }}
                         />
@@ -375,7 +370,6 @@ const AllbinBarContainer: AllbinBarContainerComponent = ({
                                 {modal_state === 'about' && (
                                     <About
                                         onClose={() => {
-                                            setSelectedListItem('');
                                             setModalState('hidden');
                                         }}
                                         tool_title={title}
@@ -386,7 +380,6 @@ const AllbinBarContainer: AllbinBarContainerComponent = ({
                                     <Changelog
                                         current_version={current_version}
                                         onClose={() => {
-                                            setSelectedListItem('');
                                             setModalState('hidden');
                                         }}
                                     />
@@ -394,7 +387,6 @@ const AllbinBarContainer: AllbinBarContainerComponent = ({
                                 {modal_state === 'contact' && (
                                     <Contact
                                         onClose={() => {
-                                            setSelectedListItem('');
                                             setModalState('hidden');
                                         }}
                                     />
@@ -402,7 +394,6 @@ const AllbinBarContainer: AllbinBarContainerComponent = ({
                                 {modal_state === 'help' && (
                                     <Help
                                         onClose={() => {
-                                            setSelectedListItem('');
                                             setModalState('hidden');
                                         }}
                                     />
