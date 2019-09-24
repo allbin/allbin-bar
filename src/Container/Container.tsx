@@ -128,13 +128,20 @@ const useStyles = makeStyles((theme: Theme) =>
       pointerEvents: "none"
     },
     modalContainer: {
+      backgroundPosition: "top right",
+      position: "relative",
       backgroundColor: "#fff",
       pointerEvents: "all",
-      paddingTop: 80,
+      paddingTop: 100,
       width: "calc(100% - " + width + "px)",
       margin: "0 0 0 auto",
+      overflow: "auto",
       height: "100%",
       outline: "none"
+    },
+    modalCard: {
+      backgroundColor: "transparent",
+      boxShadow: "none"
     },
     bottomList: {
       backgroundColor: "#182B4F",
@@ -145,7 +152,6 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(3, 4),
       zIndex: 2
     },
-
     credentials: {
       color: "white"
     },
@@ -335,11 +341,7 @@ const AllbinBarContainer: AllbinBarContainerComponent = ({
               lg={8}
               style={{ backgroundColor: "transparent" }}
             >
-              <Card
-                style={{
-                  backgroundColor: "transparent"
-                }}
-              >
+              <Card className={classes.modalCard}>
                 {modal_state === "about" && (
                   <About
                     onClose={() => {

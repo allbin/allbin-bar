@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(1, 2),
       flexDirection: "row-reverse",
       marginBottom: theme.spacing(2),
-      opacity: 0.8,
+      opacity: 0.6,
       backgroundColor: "transparent",
       "& .border": {
         height: 5,
@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme: Theme) =>
       "& span": {
         color: "#fff",
         marginRight: theme.spacing(4),
-        fontSize: 42,
+        fontSize: 36,
         fontWeight: "bold"
       }
     },
