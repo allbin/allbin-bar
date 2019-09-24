@@ -127,7 +127,9 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     modalContainer: {
       backgroundColor: "transparent",
-      marginTop: 60,
+      width: "calc(100% - " + width + "px)",
+      margin: "80px 0 0 auto",
+      height: "100%",
       outline: "none"
     },
     bottomList: {
@@ -307,6 +309,7 @@ const AllbinBarContainer: AllbinBarContainerComponent = ({
         </div>
       </Drawer>
       <Modal
+        hideBackdrop={true}
         open={modal_state !== "hidden"}
         onClose={() => {
           setModalState("hidden");

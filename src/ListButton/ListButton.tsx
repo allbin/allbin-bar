@@ -45,12 +45,13 @@ const useStyles = makeStyles((theme: Theme) =>
         bottom: 0,
         right: 0,
         width: 0,
-        transition: "width 0.3s",
+        opacity: 0.5,
+        transition: "all 0.3s",
         pointerEvents: "none"
       },
       "&.active": {
         opacity: 1,
-        "& .border": { width: "100%" }
+        "& .border": { width: "100%", opacity: 1 }
       },
       "&:HOVER": {
         backgroundColor: "transparent",
