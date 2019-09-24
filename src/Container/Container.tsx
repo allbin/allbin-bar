@@ -103,6 +103,18 @@ const useStyles = makeStyles((theme: Theme) =>
       width: "100%",
       marginTop: theme.spacing(20)
     },
+    userActions: {
+      alignItems: "center",
+      display: "flex"
+    },
+    userAction: {
+      color: "#fff",
+      fontWeight: "bold",
+      cursor: "pointer",
+      "&:HOVER": {
+        opacity: 0.8
+      }
+    },
     fullList: {
       width: "auto"
     },
@@ -117,15 +129,15 @@ const useStyles = makeStyles((theme: Theme) =>
       outline: "none"
     },
     bottomList: {
-      borderRadius: "8px 8px 0 0",
-      backgroundColor: "#413D49",
+      backgroundColor: "#182B4F",
       position: "absolute",
       left: 0,
       bottom: 0,
       right: 0,
-      padding: theme.spacing(1, 2),
+      padding: theme.spacing(3, 2),
       zIndex: 2
     },
+
     credentials: {
       color: "white"
     }
@@ -167,6 +179,7 @@ const AllbinBarContainer: AllbinBarContainerComponent = ({
   show_logout_btn = show_logout_btn !== undefined ? show_logout_btn : true;
 
   const classes = useStyles();
+  console.log(sso.getJWT());
 
   return (
     <div className={classes.container}>
@@ -222,41 +235,66 @@ const AllbinBarContainer: AllbinBarContainerComponent = ({
               />
             )}
           </List>
-          <br />
-          <List className={classes.bottomList}>
-            {show_credentials && sso && sso.isLoggedIn() && (
-              <ListItem className={classes.credentials}>
-                <div style={{ width: "100%" }}>
-                  <Typography variant="overline" align="right" display="block">
-                    {text("logged_in_as")}
-                  </Typography>
-                  <Typography align="right" display="block" paragraph={true}>
-                    {sso.getJWT().getClaim("username")}
-                  </Typography>
-                </div>
-              </ListItem>
-            )}
-            {show_dashboard_btn && (
-              <ListButton
-                id="to_dashboard"
-                onClick={() =>
-                  onDashboard
-                    ? onDashboard(dashboard_redirect_url!)
-                    : (window.location.href = dashboard_redirect_url!)
-                }
-              />
-            )}
-            {show_logout_btn && (
-              <ListButton
-                id="logout"
-                onClick={() =>
-                  onLogout
-                    ? onLogout(logout_redirect_url!)
-                    : sso.logout(logout_redirect_url)
-                }
-              />
-            )}
-          </List>
+          <div className={classes.bottomList}>
+            <Grid container>
+              <Grid item xs={6}>
+                {show_credentials && sso && sso.isLoggedIn() && (
+                  <ListItem className={classes.credentials}>
+                    <div style={{ width: "100%" }}>
+                      <Typography variant="overline" display="block">
+                        {text("logged_in_as")}
+                      </Typography>
+                      <Typography variant="h5" display="block">
+                        {sso.getJWT().getClaim("username")}
+                      </Typography>
+                    </div>
+                  </ListItem>
+                )}
+              </Grid>
+              <Grid item xs={6} className={classes.userActions}>
+                <Grid
+                  container
+                  direction="column"
+                  justify="flex-end"
+                  alignItems="flex-end"
+                >
+                  {show_dashboard_btn && (
+                    <Grid item xs={12}>
+                      <Typography
+                        gutterBottom
+                        className={classes.userAction}
+                        id="to_dashboard"
+                        align="right"
+                        onClick={() =>
+                          onDashboard
+                            ? onDashboard(dashboard_redirect_url!)
+                            : (window.location.href = dashboard_redirect_url!)
+                        }
+                      >
+                        {text("to_dashboard")}
+                      </Typography>
+                    </Grid>
+                  )}
+                  {show_logout_btn && (
+                    <Grid item xs={12}>
+                      <Typography
+                        className={classes.userAction}
+                        id="logout"
+                        align="right"
+                        onClick={() =>
+                          onLogout
+                            ? onLogout(logout_redirect_url!)
+                            : sso.logout(logout_redirect_url)
+                        }
+                      >
+                        {text("logout")}
+                      </Typography>
+                    </Grid>
+                  )}
+                </Grid>
+              </Grid>
+            </Grid>
+          </div>
         </div>
       </Drawer>
       <Modal
