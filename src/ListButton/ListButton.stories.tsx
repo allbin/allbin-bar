@@ -8,9 +8,9 @@ const WrapperList: FunctionComponent<{}> = ({ children }) => {
   return (
     <div
       style={{
-        width: "300px",
+        width: "500px",
         height: "100%",
-        backgroundColor: "rgb(230,230,230)",
+        background: "gray",
         position: "absolute",
         top: 0,
         left: 0

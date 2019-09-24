@@ -8,6 +8,7 @@ import {
   IconButton,
   List,
   ListItem,
+  Fade,
   makeStyles,
   Modal,
   Theme,
@@ -77,11 +78,9 @@ const useStyles = makeStyles((theme: Theme) =>
     drawer: {
       width: width,
       flexShrink: 0,
-      "& .MuiBackdrop-root": {
-        backgroundColor: "rgba(255, 255, 255, 0.5)"
-      },
+      "& .MuiBackdrop-root": {},
       "& .MuiPaper-root": {
-        backgroundColor: "#2E71E5"
+        background: "linear-gradient(269.45deg, #2E71E5 0.62%, #265FC0 98.88%)"
       }
     },
     appBar: { width: width, padding: theme.spacing(3, 5) },
@@ -125,10 +124,15 @@ const useStyles = makeStyles((theme: Theme) =>
       marginTop: theme.spacing(0.5),
       opacity: 0.8
     },
+    modal: {
+      pointerEvents: "none"
+    },
     modalContainer: {
-      backgroundColor: "transparent",
+      backgroundColor: "#fff",
+      pointerEvents: "all",
+      paddingTop: 80,
       width: "calc(100% - " + width + "px)",
-      margin: "80px 0 0 auto",
+      margin: "0 0 0 auto",
       height: "100%",
       outline: "none"
     },
@@ -138,12 +142,15 @@ const useStyles = makeStyles((theme: Theme) =>
       left: 0,
       bottom: 0,
       right: 0,
-      padding: theme.spacing(3, 2),
+      padding: theme.spacing(3, 4),
       zIndex: 2
     },
 
     credentials: {
       color: "white"
+    },
+    backdropRoot: {
+      pointerEvents: "none"
     }
   })
 );
@@ -309,63 +316,70 @@ const AllbinBarContainer: AllbinBarContainerComponent = ({
         </div>
       </Drawer>
       <Modal
+        closeAfterTransition
+        className={classes.modal}
+        BackdropProps={{ classes: { root: classes.backdropRoot } }}
         hideBackdrop={true}
         open={modal_state !== "hidden"}
         onClose={() => {
           setModalState("hidden");
         }}
       >
-        <Grid container spacing={0} className={classes.modalContainer}>
-          <Grid item sm={1} md={1} lg={2} />
-          <Grid
-            item
-            sm={10}
-            md={10}
-            lg={8}
-            style={{ backgroundColor: "transparent" }}
-          >
-            <Card
-              raised
-              style={{
-                backgroundColor: "transparent",
-                borderRadius: 32
-              }}
+        <Fade in={modal_state !== "hidden"}>
+          <Grid container spacing={0} className={classes.modalContainer}>
+            <Grid item sm={1} md={1} lg={2} />
+            <Grid
+              item
+              sm={10}
+              md={10}
+              lg={8}
+              style={{ backgroundColor: "transparent" }}
             >
-              {modal_state === "about" && (
-                <About
-                  onClose={() => {
-                    setModalState("hidden");
-                  }}
-                  tool_title={title}
-                  tool_info={tool_info}
-                />
-              )}
-              {modal_state === "changelog" && (
-                <Changelog
-                  current_version={current_version}
-                  onClose={() => {
-                    setModalState("hidden");
-                  }}
-                />
-              )}
-              {modal_state === "contact" && (
-                <Contact
-                  onClose={() => {
-                    setModalState("hidden");
-                  }}
-                />
-              )}
-              {modal_state === "help" && (
-                <Help
-                  onClose={() => {
-                    setModalState("hidden");
-                  }}
-                />
-              )}
-            </Card>
+              <Card
+                style={{
+                  backgroundColor: "transparent"
+                }}
+              >
+                {modal_state === "about" && (
+                  <About
+                    onClose={() => {
+                      setSelectedListItem("");
+                      setModalState("hidden");
+                    }}
+                    tool_title={title}
+                    tool_info={tool_info}
+                  />
+                )}
+                {modal_state === "changelog" && (
+                  <Changelog
+                    current_version={current_version}
+                    onClose={() => {
+                      setSelectedListItem("");
+                      setModalState("hidden");
+                    }}
+                  />
+                )}
+                {modal_state === "contact" && (
+                  <Contact
+                    onClose={() => {
+                      setSelectedListItem("");
+                      setModalState("hidden");
+                    }}
+                  />
+                )}
+                {modal_state === "help" && (
+                  <Help
+                    onClose={() => {
+                      setSelectedListItem("");
+                      setModalState("hidden");
+                    }}
+                  />
+                )}
+              </Card>
+            </Grid>
+            <Grid item sm={1} md={1} lg={2} />
           </Grid>
-          <Grid item sm={1} md={1} lg={2} />
-        </Grid>
+        </Fade>
       </Modal>
     </div>
   );

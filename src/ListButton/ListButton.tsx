@@ -104,6 +104,7 @@ const ListButton: ListButtonComponent = ({
     <ListItem
       className={`${classes.listItem} ${active ? "active" : ""}`}
       button
+      disableRipple
       onClick={() => onClick(id)}
       onMouseEnter={() => (onMouseEnter ? onMouseEnter(id) : undefined)}
       onMouseLeave={() => (onMouseLeave ? onMouseLeave(id) : undefined)}
