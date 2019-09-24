@@ -1,6 +1,7 @@
 import React from 'react';
 import { AppBar, Toolbar, Typography, Grid, Button } from '@material-ui/core';
 import makeStyles from './styles';
+import { ChromeReaderMode } from '@material-ui/icons';
 
 import text from '../text';
 
@@ -17,9 +18,14 @@ const Changelog = ({ current_version, onClose, changelog }: Props) => {
 
     return (
         <div className={classes.root}>
+            <ChromeReaderMode className={classes.icon} />
             <AppBar className={classes.appBar} position="static" elevation={0}>
                 <Toolbar variant="dense" className={classes.toolBar}>
-                    <Typography variant="h5" color="inherit">
+                    <Typography
+                        variant="h4"
+                        color="inherit"
+                        style={{ fontWeight: 'bold' }}
+                    >
                         {text('changelog')}
                     </Typography>
                 </Toolbar>
@@ -47,6 +53,7 @@ const Changelog = ({ current_version, onClose, changelog }: Props) => {
                         {!changelog && (
                             <div className={classes.button_bar}>
                                 <Button
+                                    color="primary"
                                     variant="contained"
                                     size="large"
                                     className={classes.button}
@@ -65,6 +72,7 @@ const Changelog = ({ current_version, onClose, changelog }: Props) => {
                                 </Typography>
                                 <div className={classes.button_bar}>
                                     <Button
+                                        color="primary"
                                         variant="contained"
                                         size="large"
                                         className={classes.button}

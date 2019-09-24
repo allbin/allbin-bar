@@ -1,6 +1,7 @@
 import React from 'react';
 import { AppBar, Toolbar, Typography, Grid, Button } from '@material-ui/core';
 import makeStyles from './styles';
+import { Help as HelpIcon } from '@material-ui/icons';
 
 import text from '../text';
 
@@ -15,9 +16,14 @@ const Help = ({ onClose }: Props) => {
 
     return (
         <div className={classes.root}>
+            <HelpIcon className={classes.icon} />
             <AppBar className={classes.appBar} position="static" elevation={0}>
                 <Toolbar variant="dense" className={classes.toolBar}>
-                    <Typography variant="h5" color="inherit">
+                    <Typography
+                        variant="h4"
+                        color="inherit"
+                        style={{ fontWeight: 'bold' }}
+                    >
                         {text('help')}
                     </Typography>
                 </Toolbar>
@@ -32,6 +38,7 @@ const Help = ({ onClose }: Props) => {
                             </Typography>
                             <div className={classes.button_bar}>
                                 <Button
+                                    color="primary"
                                     variant="contained"
                                     size="large"
                                     className={classes.button}

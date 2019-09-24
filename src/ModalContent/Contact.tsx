@@ -7,7 +7,9 @@ import {
     Button,
     Link,
 } from '@material-ui/core';
+
 import makeStyles from './styles';
+import { Call } from '@material-ui/icons';
 
 import text from '../text';
 
@@ -22,9 +24,14 @@ const Contact = ({ onClose }: Props) => {
 
     return (
         <div className={classes.root}>
+            <Call className={classes.icon} />
             <AppBar className={classes.appBar} position="static" elevation={0}>
                 <Toolbar variant="dense" className={classes.toolBar}>
-                    <Typography variant="h5" color="inherit">
+                    <Typography
+                        variant="h4"
+                        color="inherit"
+                        style={{ fontWeight: 'bold' }}
+                    >
                         {text('contact')}
                     </Typography>
                 </Toolbar>
@@ -32,9 +39,7 @@ const Contact = ({ onClose }: Props) => {
             <div className={classes.body}>
                 <Grid container>
                     <Grid item xs={12} sm={3}>
-                        <div
-                            className={classes.guidePanelBody + ' --about'}
-                        ></div>
+                        <div className={classes.guidePanelBody + ' --about'} />
                     </Grid>
                     <Grid item xs={12} sm={9}>
                         <div className={`${classes.paper_body} --padding`}>
@@ -53,6 +58,7 @@ const Contact = ({ onClose }: Props) => {
                             </Link>
                             <div className={classes.button_bar}>
                                 <Button
+                                    color="primary"
                                     variant="contained"
                                     size="large"
                                     className={classes.button}

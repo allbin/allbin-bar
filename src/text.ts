@@ -1,6 +1,6 @@
 import oh, { TypedDictionary } from 'output-helpers';
 
-type Keys = 
+type Keys =
     | 'allbin'
     | 'allbin_link_text'
     | 'about'

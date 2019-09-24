@@ -7,20 +7,9 @@ import {
     makeStyles,
     Theme,
 } from '@material-ui/core';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import ShareIcon from '@material-ui/icons/Share';
-import SaveIcon from '@material-ui/icons/Save';
-import ExportIcon from '@material-ui/icons/Print';
-import InfoIcon from '@material-ui/icons/Info';
-import PresentationIcon from '@material-ui/icons/Fullscreen';
+import { Info, Inbox, Help, Call, ChromeReaderMode } from '@material-ui/icons';
 import text from '../text';
 import { ButtonID } from '..';
-
-// import {
-//     SaveModalContent,
-//     ShareModalContent,
-//     ExportModalContent,
-// } from './ModalContent';
 
 declare global {
     interface Window {
@@ -28,70 +17,77 @@ declare global {
     }
 }
 
-type ColorKey = 'blue' | 'red';
-
 interface ListButtonProps {
     id: ButtonID;
+    active?: boolean;
     onClick: (id: ButtonID) => void;
     onMouseEnter?: (id: ButtonID) => void;
     onMouseLeave?: (id: ButtonID) => void;
-    color?: ColorKey;
 }
-interface StyleProps {
-    color?: ColorKey;
-}
-
 type ListButtonComponent = React.FunctionComponent<ListButtonProps>;
-
-const border_radius = 4;
-
-const colors: {
-    /** Returns [color, color] where the first is background and the second is text. */
-    [key in ColorKey]: [string, string]
-} = {
-    blue: ['#3f51b5', '#fff'],
-    red: ['#992132', '#fff'],
-};
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         container: {},
         listItem: {
-            borderRadius: border_radius,
+            display: 'inline-flex',
+            width: 'fit-content',
+            borderRadius: 0,
             padding: theme.spacing(1, 2),
-            marginTop: (props: StyleProps) => props.color ? theme.spacing(1) : 0,
-            backgroundColor: (props: StyleProps) => props.color ? colors[props.color][0] : undefined,
+            flexDirection: 'row-reverse',
+            marginBottom: theme.spacing(2),
+            opacity: 0.6,
+            backgroundColor: 'transparent',
+            '& .border': {
+                height: 5,
+                backgroundColor: '#fff',
+                position: 'absolute',
+                bottom: 0,
+                right: 0,
+                width: 0,
+                opacity: 0.5,
+                transition: 'all 0.3s',
+                pointerEvents: 'none',
+            },
+            '&.active': {
+                opacity: 1,
+                '& .border': { width: '100%', opacity: 1 },
+            },
             '&:HOVER': {
-                backgroundColor: 'rgb(180,180,180)',
-                '& span': {
-                    color: '#fff',
-                },
-                '& p': {
-                    color: '#fff !important',
-                },
+                backgroundColor: 'transparent',
+                opacity: 1,
+                '& .border': { width: '100px' },
             },
             '& span': {
-                color: (props: StyleProps) => props.color ? colors[props.color][1] : 'rgb(65, 61, 73)',
-                fontSize: 14,
+                color: '#fff',
+                marginRight: theme.spacing(4),
+                fontSize: 36,
+                fontWeight: 'bold',
             },
-        }
+        },
+        icon: {
+            color: '#fff',
+            '& svg': {
+                width: 34,
+                height: 34,
+                opacity: 0.5,
+            },
+        },
     }),
 );
 
 function getIcon(name: ButtonID) {
     switch (name) {
         case 'help':
-            return <SaveIcon />;
+            return <Help />;
         case 'contact':
-            return <ShareIcon />;
+            return <Call />;
         case 'changelog':
-            return <ExportIcon />;
-        case 'to_dashboard':
-            return <PresentationIcon />;
+            return <ChromeReaderMode />;
         case 'about':
-            return <InfoIcon />;
+            return <Info />;
         default:
-            return <InboxIcon />;
+            return <Inbox />;
     }
 }
 
@@ -100,24 +96,22 @@ const ListButton: ListButtonComponent = ({
     onClick,
     onMouseEnter,
     onMouseLeave,
-    color
+    active,
 }) => {
-    const classes = useStyles({ color });
+    const classes = useStyles();
 
     return (
-
         <ListItem
-            className={classes.listItem}
+            className={`${classes.listItem} ${active ? 'active' : ''}`}
             button
-            dense
+            disableRipple
             onClick={() => onClick(id)}
-            onMouseEnter={() => onMouseEnter ? onMouseEnter(id) : undefined}
-            onMouseLeave={() => onMouseLeave ? onMouseLeave(id) : undefined}
+            onMouseEnter={() => (onMouseEnter ? onMouseEnter(id) : undefined)}
+            onMouseLeave={() => (onMouseLeave ? onMouseLeave(id) : undefined)}
         >
-            <ListItemIcon>{getIcon(id)}</ListItemIcon>
-            <ListItemText
-                primary={text(id)}
-            />
+            <ListItemIcon className={classes.icon}>{getIcon(id)}</ListItemIcon>
+            <ListItemText primary={text(id)} />
+            <div className="border" />
         </ListItem>
     );
 };
