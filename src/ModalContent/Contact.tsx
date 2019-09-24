@@ -38,16 +38,18 @@ const Contact = ({ onClose }: Props) => {
                     </Grid>
                     <Grid item xs={12} sm={9}>
                         <div className={`${classes.paper_body} --padding`}>
-                            <Typography variant="h6">All Binary</Typography>
+                            <Typography variant="h6">
+                                {text('allbin')}
+                            </Typography>
                             <Typography variant="body2" paragraph>
                                 {text('contact_text')}
                             </Typography>
                             <Link
                                 component="a"
-                                href="https://allbinary.se"
+                                href="https://www.allbinary.se"
                                 variant="body2"
                             >
-                                https://allbinary.se
+                                {text('allbin_link_text')}
                             </Link>
                             <div className={classes.button_bar}>
                                 <Button

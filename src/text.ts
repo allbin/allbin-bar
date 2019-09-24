@@ -1,6 +1,8 @@
 import oh, { TypedDictionary } from 'output-helpers';
 
-type Keys =
+type Keys = 
+    | 'allbin'
+    | 'allbin_link_text'
     | 'about'
     | 'a_tool_by_allbin'
     | 'account_information'
@@ -37,6 +39,8 @@ export type Dictionary = { [key in Keys]: string };
 const dictionary: TypedDictionary<Dictionary> = {
     // 'prefix': 'allbin_bar_',
     'sv-SE': {
+        allbin: "All Binary",
+        allbin_link_text: "https://www.allbinary.se",
         about: 'om verktyget',
         a_tool_by_allbin: 'ett verktyg av All Binary',
         account_information: 'kontoinformation',
@@ -75,6 +79,8 @@ const dictionary: TypedDictionary<Dictionary> = {
     },
     'en-US': {
         //UI
+        allbin: "All Binary",
+        allbin_link_text: 'https://www.allbinary.se',
         about: 'about the tool',
         a_tool_by_allbin: 'a tool by All Binary',
         account_information: 'account information',
