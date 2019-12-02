@@ -13,11 +13,11 @@
         "release:major": "gulp4 buildAndReleaseMajor"
     },
     "dependencies": {
-        "@material-ui/core": "4.1.3",
-        "@material-ui/icons": "4.2.1",
         "output-helpers": "git+https://gitlab.com/allbin/public/output-helpers.git#v2.2.1"
     },
     "devDependencies": {
+        "@material-ui/core": "4.7.1",
+        "@material-ui/icons": "4.5.1",
         "del": "5.1.0",
         "react": "16.9.0",
         "react-dom": "16.9.0",
@@ -45,6 +45,8 @@
     "peerDependencies": {
         "moment": "2.*",
         "react": "16.*",
-        "react-dom": "16.*"
+        "react-dom": "16.*",
+        "@material-ui/core": "4.*",
+        "@material-ui/icons": "4.*"
     }
 }
