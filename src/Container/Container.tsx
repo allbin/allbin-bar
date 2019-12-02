@@ -5,7 +5,7 @@ import {
     createStyles,
     Drawer,
     Grid,
-    IconButton,
+    Button,
     List,
     ListItem,
     Fade,
@@ -89,14 +89,14 @@ const useStyles = makeStyles((theme: Theme) =>
         title: { fontWeight: 'bold', color: '#fff', fontSize: 42 },
         menuButton: {
             position: 'absolute',
-            top: 20,
-            right: 20,
+            right: -20,
             color: '#fff',
-            width: 60,
-            height: 60,
+            opacity: 0.6,
+            '&:HOVER': {
+                opacity: 1
+            },
             '& svg': {
-                width: 60,
-                height: 60,
+                fontSize: 52
             },
         },
         list: {
@@ -220,18 +220,18 @@ const AllbinBarContainer: AllbinBarContainerComponent = ({
                         <Typography className={classes.title} variant="h6">
                             {title}
                         </Typography>
-                    </Toolbar>
-                    <IconButton
+                        <Button
                         className={classes.menuButton}
-                        color="primary"
-                        aria-label="Menu"
+                        aria-label="Close"
                         onClick={() => {
                             setModalState('hidden');
                             onClose();
                         }}
                     >
                         <CloseIcon />
-                    </IconButton>
+                    </Button>
+                    </Toolbar>
+                    
                 </AppBar>
 
                 <List className={classes.list}>
