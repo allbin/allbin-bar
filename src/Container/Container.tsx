@@ -120,6 +120,11 @@ const useStyles = makeStyles((theme: Theme) =>
                 opacity: 0.8,
             },
         },
+        dashboardBtn: {
+            backgroundColor: '#2d6bdb',
+            borderRadius: 3,
+            padding: '2px 12px',
+        },
         fullList: {
             width: 'auto',
         },
@@ -305,7 +310,7 @@ const AllbinBarContainer: AllbinBarContainerComponent = ({
                                     <Grid item xs={12}>
                                         <Typography
                                             gutterBottom
-                                            className={classes.userAction}
+                                            className={`${classes.userAction} ${classes.dashboardBtn}`}
                                             id="to_dashboard"
                                             align="right"
                                             onClick={() =>
