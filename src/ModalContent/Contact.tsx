@@ -28,6 +28,7 @@ const Contact = ({ onClose }: Props) => {
             <AppBar className={classes.appBar} position="static" elevation={0}>
                 <Toolbar variant="dense" className={classes.toolBar}>
                     <Typography
+                        className={classes.title}
                         variant="h4"
                         color="inherit"
                         style={{ fontWeight: 'bold' }}
@@ -38,10 +39,7 @@ const Contact = ({ onClose }: Props) => {
             </AppBar>
             <div className={classes.body}>
                 <Grid container>
-                    <Grid item xs={12} sm={3}>
-                        <div className={classes.guidePanelBody + ' --about'} />
-                    </Grid>
-                    <Grid item xs={12} sm={9}>
+                    <Grid item xs={12} sm={12}>
                         <div className={`${classes.paper_body} --padding`}>
                             <Typography variant="h6">
                                 {text('allbin')}

@@ -20,7 +20,11 @@ const About = ({ onClose, tool_info, tool_title }: Props) => {
             <Info className={classes.icon} />
             <AppBar className={classes.appBar} position="static" elevation={0}>
                 <Toolbar variant="dense" className={classes.toolBar}>
-                    <Typography variant="h4" style={{ fontWeight: 'bold' }}>
+                    <Typography
+                        variant="h4"
+                        className={classes.title}
+                        style={{ fontWeight: 'bold' }}
+                    >
                         {text('about') + ' ' + tool_title}
                     </Typography>
                 </Toolbar>

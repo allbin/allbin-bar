@@ -22,6 +22,7 @@ const Changelog = ({ current_version, onClose, changelog }: Props) => {
             <AppBar className={classes.appBar} position="static" elevation={0}>
                 <Toolbar variant="dense" className={classes.toolBar}>
                     <Typography
+                        className={classes.title}
                         variant="h4"
                         color="inherit"
                         style={{ fontWeight: 'bold' }}

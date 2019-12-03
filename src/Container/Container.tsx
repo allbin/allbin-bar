@@ -29,6 +29,8 @@ import {
     //     ExportModalContent,
 } from '../ModalContent';
 
+import girlInModalImage from '../img/girl_modal.png';
+
 interface AllbinBarProps {
     /** Enables changelog button and displays the changelog. */
     changelog?: any;
@@ -70,21 +72,33 @@ interface AllbinBarProps {
 
 type AllbinBarContainerComponent = React.FunctionComponent<AllbinBarProps>;
 
-const width = 580;
+const width = {
+    small: 460,
+    large: 580,
+};
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         container: {},
         drawer: {
-            width: width,
+            width: width.large,
             flexShrink: 0,
             '& .MuiBackdrop-root': {},
             '& .MuiPaper-root': {
                 background:
                     'linear-gradient(269.45deg, #2E71E5 0.62%, #265FC0 98.88%)',
             },
+            [theme.breakpoints.down('lg')]: {
+                width: width.small,
+            },
         },
-        appBar: { width: width, padding: theme.spacing(3, 5) },
+        appBar: {
+            width: width.large,
+            padding: theme.spacing(3, 5),
+            [theme.breakpoints.down('lg')]: {
+                width: width.small,
+            },
+        },
         toolBar: { padding: 0 },
         title: { fontWeight: 'bold', color: '#fff', fontSize: 42 },
         menuButton: {
@@ -93,19 +107,19 @@ const useStyles = makeStyles((theme: Theme) =>
             color: '#fff',
             opacity: 0.6,
             '&:HOVER': {
-                opacity: 1
+                opacity: 1,
             },
             '& svg': {
-                fontSize: 52
+                fontSize: 52,
             },
         },
         list: {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'flex-end',
-            marginTop: theme.spacing(20),
+            marginTop: theme.spacing(14),
             [theme.breakpoints.down('lg')]: {
-                marginTop: theme.spacing(10),
+                marginTop: theme.spacing(6),
             },
         },
         userActions: {
@@ -137,16 +151,25 @@ const useStyles = makeStyles((theme: Theme) =>
             pointerEvents: 'none',
         },
         modalContainer: {
-            backgroundPosition: 'top right',
+            backgroundImage: 'url(' + girlInModalImage + ')',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: '44px 94%',
             position: 'relative',
             backgroundColor: '#fff',
             pointerEvents: 'all',
             paddingTop: 100,
-            width: 'calc(100% - ' + width + 'px)',
+            width: 'calc(100% - ' + width.large + 'px)',
             margin: '0 0 0 auto',
             overflow: 'auto',
             height: '100%',
             outline: 'none',
+            [theme.breakpoints.down('lg')]: {
+                paddingTop: 10,
+                width: 'calc(100% - ' + width.small + 'px)',
+            },
+            [theme.breakpoints.down('md')]: {
+                backgroundImage: 'none',
+            },
         },
         modalCard: {
             backgroundColor: 'transparent',
@@ -160,12 +183,26 @@ const useStyles = makeStyles((theme: Theme) =>
             right: 0,
             padding: theme.spacing(3, 4),
             zIndex: 2,
+            [theme.breakpoints.down('lg')]: {
+                padding: theme.spacing(2, 3),
+            },
         },
         credentials: {
             color: 'white',
         },
         backdropRoot: {
             pointerEvents: 'none',
+        },
+        signedInAs: {
+            [theme.breakpoints.down('lg')]: {
+                fontSize: 12,
+                lineHeight: '24px',
+            },
+        },
+        username: {
+            [theme.breakpoints.down('lg')]: {
+                fontSize: 20,
+            },
         },
     }),
 );
@@ -226,17 +263,16 @@ const AllbinBarContainer: AllbinBarContainerComponent = ({
                             {title}
                         </Typography>
                         <Button
-                        className={classes.menuButton}
-                        aria-label="Close"
-                        onClick={() => {
-                            setModalState('hidden');
-                            onClose();
-                        }}
-                    >
-                        <CloseIcon />
-                    </Button>
+                            className={classes.menuButton}
+                            aria-label="Close"
+                            onClick={() => {
+                                setModalState('hidden');
+                                onClose();
+                            }}
+                        >
+                            <CloseIcon />
+                        </Button>
                     </Toolbar>
-                    
                 </AppBar>
 
                 <List className={classes.list}>
@@ -286,12 +322,14 @@ const AllbinBarContainer: AllbinBarContainerComponent = ({
                                         <Typography
                                             variant="overline"
                                             display="block"
+                                            className={classes.signedInAs}
                                         >
                                             {text('logged_in_as')}
                                         </Typography>
                                         <Typography
                                             variant="h5"
                                             display="block"
+                                            className={classes.username}
                                         >
                                             {sso.getJWT().getClaim('username')}
                                         </Typography>
