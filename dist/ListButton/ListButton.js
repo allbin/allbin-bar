@@ -13,8 +13,11 @@ const useStyles = makeStyles((theme) => createStyles({
         marginBottom: theme.spacing(2),
         opacity: 0.6,
         backgroundColor: 'transparent',
+        [theme.breakpoints.down('lg')]: {
+            padding: theme.spacing(1, 1),
+        },
         '& .border': {
-            height: 5,
+            height: 4,
             backgroundColor: '#fff',
             position: 'absolute',
             bottom: 0,
@@ -23,6 +26,9 @@ const useStyles = makeStyles((theme) => createStyles({
             opacity: 0.5,
             transition: 'all 0.3s',
             pointerEvents: 'none',
+            [theme.breakpoints.down('lg')]: {
+                height: 2,
+            },
         },
         '&.active': {
             opacity: 1,
@@ -36,15 +42,18 @@ const useStyles = makeStyles((theme) => createStyles({
         '& span': {
             color: '#fff',
             marginRight: theme.spacing(4),
-            fontSize: 36,
+            fontSize: 30,
             fontWeight: 'bold',
+            [theme.breakpoints.down('lg')]: {
+                fontSize: 24,
+            },
         },
     },
     icon: {
         color: '#fff',
         '& svg': {
-            width: 34,
-            height: 34,
+            width: 28,
+            height: 28,
             opacity: 0.5,
         },
     },

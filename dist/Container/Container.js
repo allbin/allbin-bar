@@ -1,42 +1,55 @@
 import React, { useState } from 'react';
-import { AppBar, Card, createStyles, Drawer, Grid, IconButton, List, ListItem, Fade, makeStyles, Modal, Toolbar, Typography, } from '@material-ui/core';
+import { AppBar, Card, createStyles, Drawer, Grid, Button, List, ListItem, Fade, makeStyles, Modal, Toolbar, Typography, } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import text from '../text';
 import ListButton from '../ListButton';
 import { About, Changelog, Contact, Help, } from '../ModalContent';
-const width = 580;
+import girlInModalImage from '../img/girl_modal.png';
+const width = {
+    small: 460,
+    large: 580,
+};
 const useStyles = makeStyles((theme) => createStyles({
     container: {},
     drawer: {
-        width: width,
+        width: width.large,
         flexShrink: 0,
         '& .MuiBackdrop-root': {},
         '& .MuiPaper-root': {
             background: 'linear-gradient(269.45deg, #2E71E5 0.62%, #265FC0 98.88%)',
         },
+        [theme.breakpoints.down('lg')]: {
+            width: width.small,
+        },
     },
-    appBar: { width: width, padding: theme.spacing(3, 5) },
+    appBar: {
+        width: width.large,
+        padding: theme.spacing(3, 5),
+        [theme.breakpoints.down('lg')]: {
+            width: width.small,
+        },
+    },
     toolBar: { padding: 0 },
     title: { fontWeight: 'bold', color: '#fff', fontSize: 42 },
     menuButton: {
         position: 'absolute',
-        top: 20,
-        right: 20,
+        right: -20,
         color: '#fff',
-        width: 60,
-        height: 60,
+        opacity: 0.6,
+        '&:HOVER': {
+            opacity: 1,
+        },
         '& svg': {
-            width: 60,
-            height: 60,
+            fontSize: 52,
         },
     },
     list: {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'flex-end',
-        marginTop: theme.spacing(20),
+        marginTop: theme.spacing(14),
         [theme.breakpoints.down('lg')]: {
-            marginTop: theme.spacing(10),
+            marginTop: theme.spacing(6),
         },
     },
     userActions: {
@@ -51,6 +64,11 @@ const useStyles = makeStyles((theme) => createStyles({
             opacity: 0.8,
         },
     },
+    dashboardBtn: {
+        backgroundColor: '#2d6bdb',
+        borderRadius: 3,
+        padding: '2px 12px',
+    },
     fullList: {
         width: 'auto',
     },
@@ -63,16 +81,25 @@ const useStyles = makeStyles((theme) => createStyles({
         pointerEvents: 'none',
     },
     modalContainer: {
-        backgroundPosition: 'top right',
+        backgroundImage: 'url(' + girlInModalImage + ')',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: '44px 94%',
         position: 'relative',
         backgroundColor: '#fff',
         pointerEvents: 'all',
         paddingTop: 100,
-        width: 'calc(100% - ' + width + 'px)',
+        width: 'calc(100% - ' + width.large + 'px)',
         margin: '0 0 0 auto',
         overflow: 'auto',
         height: '100%',
         outline: 'none',
+        [theme.breakpoints.down('lg')]: {
+            paddingTop: 10,
+            width: 'calc(100% - ' + width.small + 'px)',
+        },
+        [theme.breakpoints.down('md')]: {
+            backgroundImage: 'none',
+        },
     },
     modalCard: {
         backgroundColor: 'transparent',
@@ -86,12 +113,26 @@ const useStyles = makeStyles((theme) => createStyles({
         right: 0,
         padding: theme.spacing(3, 4),
         zIndex: 2,
+        [theme.breakpoints.down('lg')]: {
+            padding: theme.spacing(2, 3),
+        },
     },
     credentials: {
         color: 'white',
     },
     backdropRoot: {
         pointerEvents: 'none',
+    },
+    signedInAs: {
+        [theme.breakpoints.down('lg')]: {
+            fontSize: 12,
+            lineHeight: '24px',
+        },
+    },
+    username: {
+        [theme.breakpoints.down('lg')]: {
+            fontSize: 20,
+        },
     },
 }));
 const AllbinBarContainer = ({ changelog, current_version, dashboard_redirect_url, logout_redirect_url, onClose, onDashboard, onLogout, open, show_about_btn, show_contact_btn, show_credentials, show_dashboard_btn, show_help_btn, show_logout_btn, sso, title, tool_info, }) => {
@@ -114,12 +155,12 @@ const AllbinBarContainer = ({ changelog, current_version, dashboard_redirect_url
             }, className: classes.drawer },
             React.createElement(AppBar, { position: "static", className: classes.appBar, elevation: 0 },
                 React.createElement(Toolbar, { className: classes.toolBar },
-                    React.createElement(Typography, { className: classes.title, variant: "h6" }, title)),
-                React.createElement(IconButton, { className: classes.menuButton, color: "primary", "aria-label": "Menu", onClick: () => {
-                        setModalState('hidden');
-                        onClose();
-                    } },
-                    React.createElement(CloseIcon, null))),
+                    React.createElement(Typography, { className: classes.title, variant: "h6" }, title),
+                    React.createElement(Button, { className: classes.menuButton, "aria-label": "Close", onClick: () => {
+                            setModalState('hidden');
+                            onClose();
+                        } },
+                        React.createElement(CloseIcon, null)))),
             React.createElement(List, { className: classes.list },
                 show_about_btn && (React.createElement(ListButton, { active: modal_state === 'about', id: 'about', onClick: () => {
                         setModalState('about');
@@ -137,12 +178,12 @@ const AllbinBarContainer = ({ changelog, current_version, dashboard_redirect_url
                 React.createElement(Grid, { container: true },
                     React.createElement(Grid, { item: true, xs: 6 }, show_credentials && sso && sso.isLoggedIn() && (React.createElement(ListItem, { className: classes.credentials },
                         React.createElement("div", { style: { width: '100%' } },
-                            React.createElement(Typography, { variant: "overline", display: "block" }, text('logged_in_as')),
-                            React.createElement(Typography, { variant: "h5", display: "block" }, sso.getJWT().getClaim('username')))))),
+                            React.createElement(Typography, { variant: "overline", display: "block", className: classes.signedInAs }, text('logged_in_as')),
+                            React.createElement(Typography, { variant: "h5", display: "block", className: classes.username }, sso.getJWT().getClaim('username')))))),
                     React.createElement(Grid, { item: true, xs: 6, className: classes.userActions },
                         React.createElement(Grid, { container: true, direction: "column", justify: "flex-end", alignItems: "flex-end" },
                             show_dashboard_btn && (React.createElement(Grid, { item: true, xs: 12 },
-                                React.createElement(Typography, { gutterBottom: true, className: classes.userAction, id: "to_dashboard", align: "right", onClick: () => onDashboard
+                                React.createElement(Typography, { gutterBottom: true, className: `${classes.userAction} ${classes.dashboardBtn}`, id: "to_dashboard", align: "right", onClick: () => onDashboard
                                         ? onDashboard(dashboard_redirect_url)
                                         : (window.location.href = dashboard_redirect_url) }, text('to_dashboard')))),
                             show_logout_btn && (React.createElement(Grid, { item: true, xs: 12 },

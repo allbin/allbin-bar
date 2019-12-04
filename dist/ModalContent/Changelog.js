@@ -10,7 +10,7 @@ const Changelog = ({ current_version, onClose, changelog }) => {
         React.createElement(ChromeReaderMode, { className: classes.icon }),
         React.createElement(AppBar, { className: classes.appBar, position: "static", elevation: 0 },
             React.createElement(Toolbar, { variant: "dense", className: classes.toolBar },
-                React.createElement(Typography, { variant: "h4", color: "inherit", style: { fontWeight: 'bold' } }, text('changelog')))),
+                React.createElement(Typography, { className: classes.title, variant: "h4", color: "inherit", style: { fontWeight: 'bold' } }, text('changelog')))),
         React.createElement("div", { className: classes.body },
             React.createElement(Grid, { container: true },
                 React.createElement(Grid, { item: true, xs: 12, sm: !changelog ? 12 : 4 },

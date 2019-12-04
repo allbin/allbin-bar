@@ -10,7 +10,7 @@ const About = ({ onClose, tool_info, tool_title }) => {
         React.createElement(Info, { className: classes.icon }),
         React.createElement(AppBar, { className: classes.appBar, position: "static", elevation: 0 },
             React.createElement(Toolbar, { variant: "dense", className: classes.toolBar },
-                React.createElement(Typography, { variant: "h4", style: { fontWeight: 'bold' } }, text('about') + ' ' + tool_title))),
+                React.createElement(Typography, { variant: "h4", className: classes.title, style: { fontWeight: 'bold' } }, text('about') + ' ' + tool_title))),
         React.createElement("div", { className: classes.body },
             React.createElement(Grid, { container: true },
                 React.createElement(Grid, { item: true, xs: 12, sm: 12 },
