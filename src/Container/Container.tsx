@@ -5,7 +5,7 @@ import {
     createStyles,
     Drawer,
     Grid,
-    IconButton,
+    Button,
     List,
     ListItem,
     Fade,
@@ -28,6 +28,8 @@ import {
     //     ShareModalContent,
     //     ExportModalContent,
 } from '../ModalContent';
+
+import girlInModalImage from '../img/girl_modal.png';
 
 interface AllbinBarProps {
     /** Enables changelog button and displays the changelog. */
@@ -70,42 +72,54 @@ interface AllbinBarProps {
 
 type AllbinBarContainerComponent = React.FunctionComponent<AllbinBarProps>;
 
-const width = 580;
+const width = {
+    small: 460,
+    large: 580,
+};
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         container: {},
         drawer: {
-            width: width,
+            width: width.large,
             flexShrink: 0,
             '& .MuiBackdrop-root': {},
             '& .MuiPaper-root': {
                 background:
                     'linear-gradient(269.45deg, #2E71E5 0.62%, #265FC0 98.88%)',
             },
+            [theme.breakpoints.down('lg')]: {
+                width: width.small,
+            },
         },
-        appBar: { width: width, padding: theme.spacing(3, 5) },
+        appBar: {
+            width: width.large,
+            padding: theme.spacing(3, 5),
+            [theme.breakpoints.down('lg')]: {
+                width: width.small,
+            },
+        },
         toolBar: { padding: 0 },
         title: { fontWeight: 'bold', color: '#fff', fontSize: 42 },
         menuButton: {
             position: 'absolute',
-            top: 20,
-            right: 20,
+            right: -20,
             color: '#fff',
-            width: 60,
-            height: 60,
+            opacity: 0.6,
+            '&:HOVER': {
+                opacity: 1,
+            },
             '& svg': {
-                width: 60,
-                height: 60,
+                fontSize: 52,
             },
         },
         list: {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'flex-end',
-            marginTop: theme.spacing(20),
+            marginTop: theme.spacing(14),
             [theme.breakpoints.down('lg')]: {
-                marginTop: theme.spacing(10),
+                marginTop: theme.spacing(6),
             },
         },
         userActions: {
@@ -120,6 +134,11 @@ const useStyles = makeStyles((theme: Theme) =>
                 opacity: 0.8,
             },
         },
+        dashboardBtn: {
+            backgroundColor: '#2d6bdb',
+            borderRadius: 3,
+            padding: '2px 12px',
+        },
         fullList: {
             width: 'auto',
         },
@@ -132,16 +151,25 @@ const useStyles = makeStyles((theme: Theme) =>
             pointerEvents: 'none',
         },
         modalContainer: {
-            backgroundPosition: 'top right',
+            backgroundImage: 'url(' + girlInModalImage + ')',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: '44px 94%',
             position: 'relative',
             backgroundColor: '#fff',
             pointerEvents: 'all',
             paddingTop: 100,
-            width: 'calc(100% - ' + width + 'px)',
+            width: 'calc(100% - ' + width.large + 'px)',
             margin: '0 0 0 auto',
             overflow: 'auto',
             height: '100%',
             outline: 'none',
+            [theme.breakpoints.down('lg')]: {
+                paddingTop: 10,
+                width: 'calc(100% - ' + width.small + 'px)',
+            },
+            [theme.breakpoints.down('md')]: {
+                backgroundImage: 'none',
+            },
         },
         modalCard: {
             backgroundColor: 'transparent',
@@ -155,12 +183,26 @@ const useStyles = makeStyles((theme: Theme) =>
             right: 0,
             padding: theme.spacing(3, 4),
             zIndex: 2,
+            [theme.breakpoints.down('lg')]: {
+                padding: theme.spacing(2, 3),
+            },
         },
         credentials: {
             color: 'white',
         },
         backdropRoot: {
             pointerEvents: 'none',
+        },
+        signedInAs: {
+            [theme.breakpoints.down('lg')]: {
+                fontSize: 12,
+                lineHeight: '24px',
+            },
+        },
+        username: {
+            [theme.breakpoints.down('lg')]: {
+                fontSize: 20,
+            },
         },
     }),
 );
@@ -220,18 +262,17 @@ const AllbinBarContainer: AllbinBarContainerComponent = ({
                         <Typography className={classes.title} variant="h6">
                             {title}
                         </Typography>
+                        <Button
+                            className={classes.menuButton}
+                            aria-label="Close"
+                            onClick={() => {
+                                setModalState('hidden');
+                                onClose();
+                            }}
+                        >
+                            <CloseIcon />
+                        </Button>
                     </Toolbar>
-                    <IconButton
-                        className={classes.menuButton}
-                        color="primary"
-                        aria-label="Menu"
-                        onClick={() => {
-                            setModalState('hidden');
-                            onClose();
-                        }}
-                    >
-                        <CloseIcon />
-                    </IconButton>
                 </AppBar>
 
                 <List className={classes.list}>
@@ -281,12 +322,14 @@ const AllbinBarContainer: AllbinBarContainerComponent = ({
                                         <Typography
                                             variant="overline"
                                             display="block"
+                                            className={classes.signedInAs}
                                         >
                                             {text('logged_in_as')}
                                         </Typography>
                                         <Typography
                                             variant="h5"
                                             display="block"
+                                            className={classes.username}
                                         >
                                             {sso.getJWT().getClaim('username')}
                                         </Typography>
@@ -305,7 +348,7 @@ const AllbinBarContainer: AllbinBarContainerComponent = ({
                                     <Grid item xs={12}>
                                         <Typography
                                             gutterBottom
-                                            className={classes.userAction}
+                                            className={`${classes.userAction} ${classes.dashboardBtn}`}
                                             id="to_dashboard"
                                             align="right"
                                             onClick={() =>

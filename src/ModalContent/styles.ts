@@ -2,7 +2,7 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import aboutImage from '../img/allbinary-about.jpg';
 
 const modalHeightXS = 400;
-const modalHeightLG = 500;
+const modalHeightLG = 620;
 
 export default () =>
     makeStyles((theme: Theme) =>
@@ -16,7 +16,7 @@ export default () =>
                 backgroundColor: '#fff',
                 color: theme.palette.text.primary,
                 borderRadius: 0,
-                height: 120,
+                height: 80,
                 padding: theme.spacing(3, 5),
             },
             icon: {
@@ -29,7 +29,7 @@ export default () =>
                 zIndex: 0,
                 opacity: 0.2,
                 color: '#2d6ee0',
-                [theme.breakpoints.down('md')]: {
+                [theme.breakpoints.down('lg')]: {
                     opacity: 0,
                 },
             },
@@ -56,7 +56,7 @@ export default () =>
                 position: 'relative',
                 height: modalHeightXS,
                 overflow: 'auto',
-                [theme.breakpoints.up('md')]: {
+                [theme.breakpoints.up('lg')]: {
                     height: modalHeightLG,
                 },
                 '&.--padding': {
@@ -73,7 +73,7 @@ export default () =>
             button_bar: {
                 textAlign: 'right',
                 height: 74,
-                position: 'absolute',
+                position: 'fixed',
                 bottom: 0,
                 left: 0,
                 right: 0,
@@ -91,9 +91,12 @@ export default () =>
                 },
             },
             button: {
-                margin: theme.spacing(1.5),
+                margin: theme.spacing(2),
                 boxShadow: 'none',
                 padding: theme.spacing(1.5, 8),
+            },
+            title: {
+                fontSize: 28,
             },
         }),
     );

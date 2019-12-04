@@ -21,6 +21,7 @@ const Help = ({ onClose }: Props) => {
                 <Toolbar variant="dense" className={classes.toolBar}>
                     <Typography
                         variant="h4"
+                        className={classes.title}
                         color="inherit"
                         style={{ fontWeight: 'bold' }}
                     >
