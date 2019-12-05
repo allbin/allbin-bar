@@ -1,6 +1,6 @@
 {
     "name": "allbin-bar",
-    "version": "1.0.8",
+    "version": "1.0.9",
     "main": "dist/index.js",
     "scripts": {
         "start": "react-scripts start",
@@ -13,7 +13,7 @@
         "release:major": "gulp4 buildAndReleaseMajor"
     },
     "dependencies": {
-        "output-helpers": "git+https://gitlab.com/allbin/public/output-helpers.git#v2.2.1"
+        "output-helpers": "git+https://github.com/allbin/output-helpers.git#v2.2.1"
     },
     "devDependencies": {
         "@material-ui/core": "4.7.1",
