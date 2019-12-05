@@ -12,9 +12,6 @@
         "release:minor": "gulp4 buildAndReleaseMinor",
         "release:major": "gulp4 buildAndReleaseMajor"
     },
-    "dependencies": {
-        "output-helpers": "git+https://github.com/allbin/output-helpers.git#v2.2.1"
-    },
     "devDependencies": {
         "@material-ui/core": "4.7.1",
         "@material-ui/icons": "4.5.1",
@@ -47,6 +44,7 @@
         "react": "16.*",
         "react-dom": "16.*",
         "@material-ui/core": "4.*",
-        "@material-ui/icons": "4.*"
+        "@material-ui/icons": "4.*",
+        "output-helpers": "git+https://github.com/allbin/output-helpers.git#v2.2.1"
     }
 }

@@ -8535,9 +8535,9 @@ osenv@0, osenv@^0.1.4, osenv@^0.1.5:
     os-homedir "^1.0.0"
     os-tmpdir "^1.0.0"
 
-"output-helpers@git+https://gitlab.com/allbin/public/output-helpers.git#v2.2.1":
+"output-helpers@git+https://github.com/allbin/output-helpers.git#v2.2.1":
   version "2.2.1"
-  resolved "git+https://gitlab.com/allbin/public/output-helpers.git#82eed1df8d71c349908a08885dc661d8f6cfc122"
+  resolved "git+https://github.com/allbin/output-helpers.git#82eed1df8d71c349908a08885dc661d8f6cfc122"
 
 p-cancelable@^1.0.0:
   version "1.1.0"
