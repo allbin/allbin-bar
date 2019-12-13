@@ -30,6 +30,7 @@ import {
 } from '../ModalContent';
 
 import girlInModalImage from '../img/girl_modal.png';
+import { LangId } from 'output-helpers';
 
 interface AllbinBarProps {
     /** Enables changelog button and displays the changelog. */
@@ -42,12 +43,22 @@ interface AllbinBarProps {
      */
     dashboard_redirect_url?: string;
     /**
+     * Specify which language button should be shown as highlighted.
+     * Must specify an onLanguage callback for this property to have any effect.
+     */
+    language?: LangId;
+    /**
      * URL sent to SSO.logout command or onLogout callback if provided.
      * Defaults to 'https://login.allbin.se/'.
      */
     logout_redirect_url?: string;
-    onDashboard?: (dashboard_url: string) => void;
     onClose: () => void;
+    onDashboard?: (dashboard_url: string) => void;
+    /**
+     * This callback is called when the user clicks a language selection button.
+     * Must specify a _language_ property for this callback to have any effect.
+     */
+    onLanguage?: (language: LangId) => void;
     onLogout?: (logout_url: string) => void;
     /** Shows AllbinBar. Defaults to false. */
     open: boolean;
@@ -64,7 +75,7 @@ interface AllbinBarProps {
     /** Displays and enables a 'logout'-button. Defaults to true. */
     show_logout_btn?: boolean;
     /** Reference to window.sso. */
-    sso: any;
+    sso?: any;
     title: string;
     /** Each string will be a separate paragraph in the 'about'-text. */
     tool_info?: string[];
@@ -94,7 +105,7 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         appBar: {
             width: width.large,
-            padding: theme.spacing(3, 5),
+            padding: theme.spacing(1, 5, 0, 4),
             [theme.breakpoints.down('lg')]: {
                 width: width.small,
             },
@@ -132,6 +143,22 @@ const useStyles = makeStyles((theme: Theme) =>
             cursor: 'pointer',
             '&:HOVER': {
                 opacity: 0.8,
+            },
+        },
+        languageBtn: {
+            color: '#fff',
+            fontSize: '12px',
+            margin: theme.spacing(1),
+            cursor: 'pointer',
+            '&:HOVER': {
+                opacity: 0.6,
+            },
+        },
+        languageBtnHighlight: {
+            cursor: 'default',
+            fontWeight: 'bold',
+            '&:HOVER': {
+                opacity: 1,
             },
         },
         dashboardBtn: {
@@ -213,9 +240,11 @@ const AllbinBarContainer: AllbinBarContainerComponent = ({
     changelog,
     current_version,
     dashboard_redirect_url,
+    language,
     logout_redirect_url,
     onClose,
     onDashboard,
+    onLanguage,
     onLogout,
     open,
     show_about_btn,
@@ -274,7 +303,51 @@ const AllbinBarContainer: AllbinBarContainerComponent = ({
                         </Button>
                     </Toolbar>
                 </AppBar>
-
+                <Grid container direction="row">
+                    {onLanguage && language && (
+                        <>
+                            <Grid item xs={2}>
+                                <Typography
+                                    gutterBottom
+                                    className={
+                                        language === 'en-US'
+                                            ? classes.languageBtn +
+                                              ' ' +
+                                              classes.languageBtnHighlight
+                                            : classes.languageBtn
+                                    }
+                                    align="right"
+                                    onClick={() =>
+                                        language !== 'en-US' &&
+                                        onLanguage('en-US')
+                                    }
+                                >
+                                    English
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={2}>
+                                <Typography
+                                    gutterBottom
+                                    className={
+                                        language === 'sv-SE'
+                                            ? classes.languageBtn +
+                                              ' ' +
+                                              classes.languageBtnHighlight
+                                            : classes.languageBtn
+                                    }
+                                    align="left"
+                                    onClick={() =>
+                                        language !== 'sv-SE' &&
+                                        onLanguage('sv-SE')
+                                    }
+                                >
+                                    Svenska
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={8} />
+                        </>
+                    )}
+                </Grid>
                 <List className={classes.list}>
                     {show_about_btn && (
                         <ListButton
@@ -313,6 +386,7 @@ const AllbinBarContainer: AllbinBarContainerComponent = ({
                         />
                     )}
                 </List>
+
                 <div className={classes.bottomList}>
                     <Grid container>
                         <Grid item xs={6}>

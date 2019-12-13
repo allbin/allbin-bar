@@ -32,6 +32,7 @@ type Keys =
     | 'to_dashboard'
     | 'updated'
     | 'username'
+    | 'only_affects_this_tool'
     ;
 
 export type Dictionary = { [key in Keys]: string };
@@ -76,6 +77,7 @@ const dictionary: TypedDictionary<Dictionary> = {
         to_dashboard: 'till Dashboard',
         updated: 'uppdaterat',
         username: 'användarnamn',
+        only_affects_this_tool: 'påverkar endast detta verktyg',
     },
     'en-US': {
         //UI
@@ -115,6 +117,7 @@ const dictionary: TypedDictionary<Dictionary> = {
         to_dashboard: 'to Dashboard',
         updated: 'updated',
         username: 'username',
+        only_affects_this_tool: 'only affects this tool'
     },
 };
 
