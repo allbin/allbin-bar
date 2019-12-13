@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => createStyles({
     },
     appBar: {
         width: width.large,
-        padding: theme.spacing(3, 5),
+        padding: theme.spacing(1, 5, 0, 4),
         [theme.breakpoints.down('lg')]: {
             width: width.small,
         },
@@ -62,6 +62,22 @@ const useStyles = makeStyles((theme) => createStyles({
         cursor: 'pointer',
         '&:HOVER': {
             opacity: 0.8,
+        },
+    },
+    languageBtn: {
+        color: '#fff',
+        fontSize: '12px',
+        margin: theme.spacing(1),
+        cursor: 'pointer',
+        '&:HOVER': {
+            opacity: 0.6,
+        },
+    },
+    languageBtnHighlight: {
+        cursor: 'default',
+        fontWeight: 'bold',
+        '&:HOVER': {
+            opacity: 1,
         },
     },
     dashboardBtn: {
@@ -135,7 +151,7 @@ const useStyles = makeStyles((theme) => createStyles({
         },
     },
 }));
-const AllbinBarContainer = ({ changelog, current_version, dashboard_redirect_url, logout_redirect_url, onClose, onDashboard, onLogout, open, show_about_btn, show_contact_btn, show_credentials, show_dashboard_btn, show_help_btn, show_logout_btn, sso, title, tool_info, }) => {
+const AllbinBarContainer = ({ changelog, current_version, dashboard_redirect_url, language, logout_redirect_url, onClose, onDashboard, onLanguage, onLogout, open, show_about_btn, show_contact_btn, show_credentials, show_dashboard_btn, show_help_btn, show_logout_btn, sso, title, tool_info, }) => {
     let [modal_state, setModalState] = useState('hidden');
     dashboard_redirect_url =
         dashboard_redirect_url || 'https://dashboard.allbin.se';
@@ -161,6 +177,22 @@ const AllbinBarContainer = ({ changelog, current_version, dashboard_redirect_url
                             onClose();
                         } },
                         React.createElement(CloseIcon, null)))),
+            React.createElement(Grid, { container: true, direction: "row" }, onLanguage && language && (React.createElement(React.Fragment, null,
+                React.createElement(Grid, { item: true, xs: 2 },
+                    React.createElement(Typography, { gutterBottom: true, className: language === 'en-US'
+                            ? classes.languageBtn +
+                                ' ' +
+                                classes.languageBtnHighlight
+                            : classes.languageBtn, align: "right", onClick: () => language !== 'en-US' &&
+                            onLanguage('en-US') }, "English")),
+                React.createElement(Grid, { item: true, xs: 2 },
+                    React.createElement(Typography, { gutterBottom: true, className: language === 'sv-SE'
+                            ? classes.languageBtn +
+                                ' ' +
+                                classes.languageBtnHighlight
+                            : classes.languageBtn, align: "left", onClick: () => language !== 'sv-SE' &&
+                            onLanguage('sv-SE') }, "Svenska")),
+                React.createElement(Grid, { item: true, xs: 8 })))),
             React.createElement(List, { className: classes.list },
                 show_about_btn && (React.createElement(ListButton, { active: modal_state === 'about', id: 'about', onClick: () => {
                         setModalState('about');

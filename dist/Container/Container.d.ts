@@ -1,4 +1,5 @@
 import React from 'react';
+import { LangId } from 'output-helpers';
 interface AllbinBarProps {
     /** Enables changelog button and displays the changelog. */
     changelog?: any;
@@ -10,12 +11,22 @@ interface AllbinBarProps {
      */
     dashboard_redirect_url?: string;
     /**
+     * Specify which language button should be shown as highlighted.
+     * Must specify an onLanguage callback for this property to have any effect.
+     */
+    language?: LangId;
+    /**
      * URL sent to SSO.logout command or onLogout callback if provided.
      * Defaults to 'https://login.allbin.se/'.
      */
     logout_redirect_url?: string;
-    onDashboard?: (dashboard_url: string) => void;
     onClose: () => void;
+    onDashboard?: (dashboard_url: string) => void;
+    /**
+     * This callback is called when the user clicks a language selection button.
+     * Must specify a _language_ property for this callback to have any effect.
+     */
+    onLanguage?: (language: LangId) => void;
     onLogout?: (logout_url: string) => void;
     /** Shows AllbinBar. Defaults to false. */
     open: boolean;
@@ -32,7 +43,7 @@ interface AllbinBarProps {
     /** Displays and enables a 'logout'-button. Defaults to true. */
     show_logout_btn?: boolean;
     /** Reference to window.sso. */
-    sso: any;
+    sso?: any;
     title: string;
     /** Each string will be a separate paragraph in the 'about'-text. */
     tool_info?: string[];

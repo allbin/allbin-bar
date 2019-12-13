@@ -39,6 +39,7 @@ const dictionary = {
         to_dashboard: 'till Dashboard',
         updated: 'uppdaterat',
         username: 'användarnamn',
+        only_affects_this_tool: 'påverkar endast detta verktyg',
     },
     'en-US': {
         //UI
@@ -78,6 +79,7 @@ const dictionary = {
         to_dashboard: 'to Dashboard',
         updated: 'updated',
         username: 'username',
+        only_affects_this_tool: 'only affects this tool'
     },
 };
 const translate = (key, capitalize = true) => {
