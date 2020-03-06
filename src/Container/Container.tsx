@@ -21,7 +21,7 @@ import ListButton from '../ListButton';
 
 import {
     About,
-    Changelog,
+    ChangelogModal,
     Contact,
     Help,
     //     SaveModalContent,
@@ -34,7 +34,7 @@ import { LangId } from 'output-helpers';
 
 interface AllbinBarProps {
     /** Enables changelog button and displays the changelog. */
-    changelog?: any;
+    changelog?: Changelog;
     /** Enables changelog button and displays current_version. */
     current_version?: string;
     /**
@@ -497,8 +497,9 @@ const AllbinBarContainer: AllbinBarContainerComponent = ({
                                     />
                                 )}
                                 {modal_state === 'changelog' && (
-                                    <Changelog
+                                    <ChangelogModal
                                         current_version={current_version}
+                                        changelog={changelog}
                                         onClose={() => {
                                             setModalState('hidden');
                                         }}

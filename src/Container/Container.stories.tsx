@@ -2,6 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import Container from '.';
 import { action } from '@storybook/addon-actions';
+import {CHANGELOG} from '../changelog';
 
 let sso = {
     getJWT: () => ({
@@ -31,6 +32,7 @@ storiesOf('AllbinBar', module)
                 onLanguage={action('onLanguage')}
                 language={'sv-SE'}
                 title="IWA"
+                changelog={CHANGELOG}
                 current_version="v1.0.1"
                 show_about_btn={true}
                 show_help_btn={true}
@@ -50,6 +52,7 @@ storiesOf('AllbinBar', module)
                 onDashboard={action('onDashboard')}
                 title="IWA"
                 current_version="v1.0.1"
+                changelog={CHANGELOG}
                 show_about_btn={true}
                 show_help_btn={true}
                 show_logout_btn={false}
@@ -68,6 +71,7 @@ storiesOf('AllbinBar', module)
                 onDashboard={action('onDashboard')}
                 title="No SSO Test"
                 current_version="v1.0.1"
+                changelog={CHANGELOG}
                 show_about_btn={false}
                 show_help_btn={false}
                 show_logout_btn={false}

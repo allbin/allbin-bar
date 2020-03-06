@@ -1,6 +1,7 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography, Grid, Button } from '@material-ui/core';
+import {AppBar, Toolbar, Typography, Grid, Button, List, ListItem, ListItemText} from '@material-ui/core';
 import makeStyles from './styles';
+import oh from 'output-helpers';
 import { ChromeReaderMode } from '@material-ui/icons';
 
 import text from '../text';
@@ -8,14 +9,14 @@ import text from '../text';
 interface Props {
     onClose: () => void;
     current_version?: string;
-    changelog?: any;
+    changelog?: Changelog;
 }
 
 const useStyles = makeStyles();
 
-const Changelog = ({ current_version, onClose, changelog }: Props) => {
+const ChangelogModal = ({ current_version, onClose, changelog }: Props) => {
     const classes = useStyles();
-
+    const lang = oh.getLang();
     return (
         <div className={classes.root}>
             <ChromeReaderMode className={classes.icon} />
@@ -68,9 +69,11 @@ const Changelog = ({ current_version, onClose, changelog }: Props) => {
                     {changelog && (
                         <Grid item xs={12} sm={8}>
                             <div className={`${classes.paper_body} --padding`}>
-                                <Typography variant="body2" paragraph>
-                                    Changelog is currently not implemented!
-                                </Typography>
+                                <List>
+                                    {changelog.map(log_entry =>
+                                        <ListItem key={log_entry.title[lang]}><ListItemText primary={log_entry.title[lang]} secondary={<React.Fragment>{log_entry.changes && log_entry.changes.map(change => <Typography key={change[lang]}>{change[lang]}</Typography> )}</React.Fragment>}/></ListItem>
+                                    )}
+                                </List>
                                 <div className={classes.button_bar}>
                                     <Button
                                         color="primary"
@@ -91,4 +94,6 @@ const Changelog = ({ current_version, onClose, changelog }: Props) => {
     );
 };
 
-export default Changelog;
+export default ChangelogModal;
+
+
