@@ -1,9 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import { storiesOf } from '@storybook/react';
 import { Modal, Grid, Card } from '@material-ui/core';
-import { Changelog, Contact } from '.';
+import { ChangelogModal, Contact } from '.';
 import { action } from '@storybook/addon-actions';
 import About from './About';
+import {CHANGELOG} from '../changelog';
 
 const WrappedModalContent: FunctionComponent = ({ children }) => {
     return (
@@ -39,16 +40,16 @@ storiesOf('ModalContent', module)
     ))
     .add('Changelog', () => (
         <WrappedModalContent>
-            <Changelog
+            <ChangelogModal
                 onClose={action('changelog close')}
                 current_version="v1.0.1"
-                changelog={'not_yet_implemented'}
+                changelog={CHANGELOG}
             />
         </WrappedModalContent>
     ))
     .add('Changelog Only CurrentVersion', () => (
         <WrappedModalContent>
-            <Changelog
+            <ChangelogModal
                 onClose={action('changelog close')}
                 current_version="v1.0.1"
             />
