@@ -1,8 +1,7 @@
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import aboutImage from '../img/allbinary-about.jpg';
 
-const modalHeightXS = 400;
-const modalHeightLG = 620;
+const modalHeightXS = 150;
 
 export default () =>
     makeStyles((theme: Theme) =>
@@ -44,9 +43,6 @@ export default () =>
                 padding: theme.spacing(3, 5),
                 overflow: 'auto',
                 height: modalHeightXS,
-                [theme.breakpoints.up('md')]: {
-                    height: modalHeightLG,
-                },
                 '&.--about': {
                     backgroundImage: 'url(' + aboutImage + ')',
                     backgroundSize: 'cover',
@@ -54,11 +50,8 @@ export default () =>
             },
             paper_body: {
                 position: 'relative',
-                height: modalHeightXS,
+                height: 'auto',
                 overflow: 'auto',
-                [theme.breakpoints.up('lg')]: {
-                    height: modalHeightLG,
-                },
                 '&.--padding': {
                     padding: theme.spacing(3, 5),
                 },
