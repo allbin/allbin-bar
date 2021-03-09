@@ -1,4 +1,4 @@
-import oh, { TypedDictionary } from 'output-helpers';
+import oh, { TypedDictionary } from '@allbin/output-helpers';
 
 type Keys =
     | 'allbin'

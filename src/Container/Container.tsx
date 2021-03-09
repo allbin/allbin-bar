@@ -30,7 +30,7 @@ import {
 } from '../ModalContent';
 
 import girlInModalImage from '../img/girl_modal.png';
-import { LangId } from 'output-helpers';
+import { LangId } from '@allbin/output-helpers';
 
 interface AllbinBarProps {
     /** Enables changelog button and displays the changelog. */
