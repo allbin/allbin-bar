@@ -1,5 +1,5 @@
 import React from 'react';
-import { LangId } from 'output-helpers';
+import { LangId } from '@allbin/output-helpers';
 interface AllbinBarProps {
     /** Enables changelog button and displays the changelog. */
     changelog?: any;

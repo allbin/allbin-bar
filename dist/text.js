@@ -1,4 +1,4 @@
-import oh from 'output-helpers';
+import oh from '@allbin/output-helpers';
 const dictionary = {
     // 'prefix': 'allbin_bar_',
     'sv-SE': {
